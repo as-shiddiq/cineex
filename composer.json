@@ -2,6 +2,7 @@
     "name": "as-shiddiq/cineex",
     "description": "CiNeex - CodeIgniter Next and Extendable",
     "type": "library",
+    "license": "proprietary",
     "require": {
         "php": ">=7.4.0"
     },
