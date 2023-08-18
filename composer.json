@@ -1,0 +1,20 @@
+{
+    "name": "as-shiddiq/cineex",
+    "description": "CiNeex - CodeIgniter Next and Extendable",
+    "type": "library",
+    "require": {
+        "php": ">=7.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cineex\\": "src/Cineex/"
+        }
+    },
+    "authors": [
+        {
+            "name": "as-shiddiq",
+            "email": "nasrullahsiddik@gmail.com"
+        }
+    ],
+    "require": {}
+}
