@@ -1,6 +1,6 @@
 <?php
 
-namespace AsShiddiq\Cineex;
+namespace Cineex;
 
 class Cineex {
 	public function tes()

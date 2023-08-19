@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cineex\\": "src/Cineex/"
+            "Cineex\\": "src/"
         }
     },
     "minimum-stability": "dev",
