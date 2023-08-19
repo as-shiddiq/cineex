@@ -1,2 +1,8 @@
+/app/
+/public/
+/test/
+/writable/
+/modules/
 /vendor/
 composer.lock
+spark

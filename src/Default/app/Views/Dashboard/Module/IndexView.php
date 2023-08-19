@@ -116,9 +116,9 @@ $custom = '<a href="#"  onclick="addDataThis()" class="btn btn-info btn-sm btn-a
 			<!--begin::Modal header-->
 			<div class="modal-header">
 				<h3><?=$page?></h3>
-				<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-					<span class="bi bi-x fs-2x"></span>
-				</div>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
 			</div>
 			<!--end::Modal header-->
 			<!--begin::Modal body-->
@@ -146,8 +146,8 @@ $custom = '<a href="#"  onclick="addDataThis()" class="btn btn-info btn-sm btn-a
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" form="form-data" class="btn btn-info  ms-0 me-md-2  font-weight-bolder"><i class="bi bi-save"></i> Save Data</button>
-    			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="submit" form="form-data" class="btn btn-primary  ms-0 me-md-2  font-weight-bolder"><i class="bi bi-save"></i> Save Data</button>
+    			<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
 			</div>
 			<!--end::Modal body-->
 		</div>
@@ -176,7 +176,7 @@ let setNested = async () => {
   			setActive = 'bg-light-primary';
   		}
       var html = `<li class="dd-item" data-id="${row.id}">
-      		<div class="d-flex align-items-center dd-body justify-content-between ${setActive}">
+      		<div class="d-flex align-items-center px-3 dd-body justify-content-between ${setActive}">
       		<div class="d-flex align-items-center ">
 				<div class="dd-handle dd3-handle">
       					<i class="bi bi-list"></i>
@@ -189,21 +189,18 @@ let setNested = async () => {
                		</div>
                 </div>
 			</div>
-            <div class="pe-3">
-            <a href="#" class="btn btn-icon btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                <span class="bi bi-three-dots-vertical m-0"></span>
-            </a>
-            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-            	<div class="menu-item px-3">
-	                    <a href="javascript:;"  onclick="updateDataThis('${row.id}','${row.text}')" title="Edit Data" class="menu-link px-3">
-							Edit
-	                    </a>
-	                </div>
-                <div class="menu-item px-3">
-	                    <a href="javascript:;" onclick="deleteDataThis('${row.id}','${row.text}')" title="Delete Data" class="menu-link px-3">
-							Delete
-	                    </a>
-	                </div>
+            <div class="px-3">
+            <div class="d-flex align-items-center justify-content-end gap" data-kt-menu="true">
+            	<div>
+                    <a href="javascript:;"  onclick="updateDataThis('${row.id}','${row.text}')" title="Edit Data" class="btn btn-primary btn-icon">
+                    	<span class="bi bi-pencil"></span>
+                    </a>
+                </div>
+                <div>
+                    <a href="javascript:;" onclick="deleteDataThis('${row.id}','${row.text}')" title="Delete Data" class="btn btn-primary btn-icon text-danger">
+                    	<span class="bi bi-trash"></span>
+                    </a>
+                </div>
            	 </div>
             </div>
         </div>`;
@@ -228,9 +225,8 @@ let setNested = async () => {
   }
   $('.dd3-list').html(output);
   $('#nestable3').nestable({
-  	maxDepth :3
+  	maxDepth :1
   });
-  KTMenu.createInstances();
 }
 
 setNested();
@@ -254,7 +250,6 @@ async function updateNestable(){
               icon: 'success',
               title: resp.message
             });
-        elBtnRefresh.click();
   	}
   	else
   	{

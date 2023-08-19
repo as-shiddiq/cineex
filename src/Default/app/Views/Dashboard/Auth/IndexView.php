@@ -5,129 +5,84 @@ $configWeb = configWeb();
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<?php include includeView('dashboard','head.php')?>
+		<?php include includeView('main','head.php')?>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" class="app-blank app-blank">
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root" id="kt_app_root">
-			<!--begin::Authentication - Sign-in -->
-			<div class="d-flex flex-column flex-lg-row flex-column-fluid">
-				<!--begin::Body-->
-				<div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
-					<!--begin::Form-->
-					<div class="d-flex flex-center flex-column flex-lg-row-fluid">
-						<!--begin::Wrapper-->
-						<div class="w-md-500px w-100 p-10">
-							<!--begin::Form-->
-								<form class="form w-100" novalidate="novalidate"  id="form-data" action="#">
-								<div class="text-center mb-11">
-									<!--begin::Title-->
-									<h1 class="text-dark fw-bolder mb-3">Sign In</h1>
-									<!--end::Title-->
-									<!--begin::Subtitle-->
-									<div class="text-gray-500 fw-semibold fs-6">Gunakan akun yang terdaftar</div>
-									<!--end::Subtitle=-->
-								</div>
-								<!--begin::Heading-->
-								<!-- <div class="separator separator-content my-14">
-									<span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
-								</div> -->
-								<!--begin::Heading-->
-								<!--begin::Input group-->
-								<div class="fv-row mb-10 pristine-validate">
-									<!--begin::Label-->
-									<label class="form-label fs-6 fw-bolder text-dark">Username</label>
-									<!--end::Label-->
-									<!--begin::Input-->
-									<input class="form-control form-control-lg " required type="text" name="username" autocomplete="off" />
-									<!--end::Input-->
-								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
-								<div class="fv-row mb-10 pristine-validate">
-									<!--begin::Wrapper-->
-									<div class="d-flex flex-stack mb-2">
-										<!--begin::Label-->
-										<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
-										<!--end::Label-->
-										<!--begin::Link-->
-										<!-- <a href="/auth/forgot" class="link-primary fs-6 fw-bolder" tabindex="-1">Lupa Password ?</a> -->
-										<!--end::Link-->
-									</div>
-									<!--end::Wrapper-->
-									<!--begin::Input-->
-									<div class="position-relative mb-3">
-										<input class="form-control form-control-lg " type="password" placeholder="" id="pwd" required name="password" autocomplete="off" />
-										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility" onclick="showPw(this,'password')">
-											<i class="bi bi-eye-slash fs-2"></i>
-											<i class="bi bi-eye fs-2 d-none"></i>
-										</span>
-									</div>
-									<!--end::Input-->
-								</div>
-								<!--end::Input group-->
-								<!--begin::Actions-->
-								<div class="text-center">
-									<!--begin::Submit button-->
-									<button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-info mb-5 w-100">
-										<span class="indicator-label">Masuk</span>
-									</button>
-								</div>
-								<!--end::Submit button-->
-								<!--begin::Sign up-->
-							<!-- 	<div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? 
-								<a href="/metronic8/demo26/../demo26/authentication/layouts/corporate/sign-up.html" class="link-primary">Sign up</a></div> -->
-								<!--end::Sign up-->
-							</form>
-							<!--end::Form-->
-						</div>
-						<!--end::Wrapper-->
-					</div>
-					<!--end::Form-->
-					<!--begin::Footer-->
-					<div class="d-flex flex-center flex-wrap px-5">
-						<!--begin::Links-->
-						<div class="d-flex fw-semibold text-danger fs-base">
-							<a href="/" class="px-5 text-danger" target="_blank">Beranda</a>
-							<a href="/artikel" class="px-5 text-danger" target="_blank">Artikel</a>
-							<a href="/kontak" class="px-5 text-danger" target="_blank">Kontak</a>
-						</div>
-						<!--end::Links-->
-					</div>
-					<!--end::Footer-->
-				</div>
-				<!--end::Body-->
-				<!--begin::Aside-->
-				<div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background:#539">
-					<!--begin::Content-->
-					<div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
-						<!--begin::Logo-->
-						<!--end::Logo-->
-						<!--begin::Image-->
-						<img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="/templates/<?=getenv('cineex.template.dashboard')?>/assets/media/misc/auth-screens.png" alt="" />
-						<!--end::Image-->
-						<!--begin::Title-->
-						<h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"><?=$configWeb->config_web_nama?></h1>
-						<!--end::Title-->
-						<!--begin::Text-->
-						<div class="d-none d-lg-block text-white fs-base text-center"><?=$configWeb->config_web_deskripsi?></div>
-						<!--end::Text-->
-					</div>
-					<!--end::Content-->
-				</div>
-				<!--end::Aside-->
-			</div>
-			<!--end::Authentication - Sign-in-->
-		</div>
+	<body>
+		<main>
+        <!-- Section -->
+        <section class="min-vh-100 d-flex bg-primary align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 justify-content-center">
+                        <div class="card bg-primary shadow-soft border-light p-4">
+                            <div class="card-header text-center pb-0">
+	                        	<img src="<?=$configWeb->config_web_logo_light_url?>" width="150px">
+                                <h2 class="h4">Sign in to our platform</h2>  
+                            </div>
+                            <div class="card-body">
+                                <form action="#" id="form-data" class="mt-4">
+                                    <!-- Form -->
+                                    <div class="form-group pristine-validate">
+                                        <label for="exampleInputIcon3">Username</label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="bi bi-person"></span></span>
+                                            </div>
+                                            <input class="form-control" name="username" id="exampleInputIcon3" placeholder="Type your username" type="text" aria-label="username">
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="form-group">
+                                        <!-- Form -->
+                                        <div class="form-group pristine-validate">
+                                            <label for="exampleInputPassword6">Password</label>
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><span class="bi bi-key"></span></span>
+                                                </div>
+                                                <input class="form-control" name="password" id="exampleInputPassword6" placeholder="Password" type="password" aria-label="Password" required>
+                                            </div>
+                                        </div>
+                                        <!-- End of Form -->
+                                        <div class="d-block d-sm-flex justify-content-between align-items-center mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                                <label class="form-check-label" for="defaultCheck5">
+                                                  Remember me
+                                                </label>
+                                            </div>
+                                            <div><a href="#" class="small text-right">Lost password?</a></div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary" form="form-data">Sign in</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 		<!--end::Root-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "/metronic8/demo26/assets/";</script>
-		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/assets/js/scripts.bundle.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="/assets/js/pristine/pristine.js" type="text/javascript"></script>
+
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/jquery/dist/jquery.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/popper.js/dist/umd/popper.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/headroom.js/dist/headroom.min.js"></script>
+
+		<!-- Vendor JS -->
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/nouislider/distribute/nouislider.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/jarallax/dist/jarallax.min.js"></script>
+		<script src="/templates/<?=getenv('cineex.template.dashboard')?>/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
 		<!--end::Root-->
 		<!--end::Main-->
 		<!--end::Page Custom Javascript-->

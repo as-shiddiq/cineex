@@ -162,9 +162,9 @@
 				<!--begin::Modal header-->
 				<div class="modal-header">
 					<h3>Foto Profil</h3>
-					<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-						<span class="bi bi-x fs-2x"></span>
-					</div>
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
 				</div>
 				<!--end::Modal header-->
 				<!--begin::Modal body-->
@@ -190,7 +190,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="upload-result btn btn-primary d-none" type="button">Upload</button>
-        			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 				<!--end::Modal body-->
 			</div>

@@ -17,7 +17,7 @@
 			<th width="20px"></th>
 			<th>Level</th>
 			<th>Dibuat pada</th>
-			<th width="50px"></th>
+			<th width="100px"></th>
 		</tr>
 	</thead>
 </table>
@@ -52,9 +52,7 @@ $('#kt_datatable').DataTable({
 		},
 	headerCallback: function(thead, data, start, end, display) {
 		thead.getElementsByTagName('th')[0].innerHTML = `
-            <div class="form-check form-check-sm form-check-custom form-check-solid">
-				<input class="form-check-input group-checkable" type="checkbox" value="1" />
-			</div>`;
+		<div class="form-check square-check"><input class="form-check-input group-checkable" type="checkbox" value="1" id="defaultCheck111"> <label class="form-check-label" for="defaultCheck111"></label></div>`;
 	},
 	order: [[ 2, "desc" ]],
 	ajax: {
@@ -72,10 +70,7 @@ $('#kt_datatable').DataTable({
 			targets: 0,
 			orderable: false,
 			render: function(data, type, row, meta) {
-				return `
-	            <div class="form-check form-check-sm form-check-custom form-check-solid">
-					<input class="form-check-input checkable" type="checkbox" value="${data}" />
-				</div>`;
+				return `<div class="form-check square-check"><input class="form-check-input checkable" type="checkbox" value="${data}" id="defaultCheck111"> <label class="form-check-label" for="defaultCheck111"></label></div>`;
 			},
 		},
 		{

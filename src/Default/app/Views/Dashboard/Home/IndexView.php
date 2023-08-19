@@ -1,72 +1,33 @@
 <?= $this->extend('DashboardView') ?>
 <?= $this->section('stylesheet') ?>
-<style type="text/css">
-.widget-card {
-	position: relative;
-	overflow: hidden;
-}
-.widget-card .bi{
-	position: absolute;
-	top: -10;
-	bottom: 0;
-	right: 10px;
-	margin: auto;
-	font-size: 10rem;
-	color: #fff4;
-	z-index: 0;
-}
-.widget-card .widget-total
-{
-	font-size: 6rem;
-	z-index: 2;
-}
-.widget-card .widget-text
-{
-	font-weight: bold;
-	z-index: 2;
-}
-</style>
+
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div class="container-xxl" id="kt_content_container">
-<div class="card" style="margin-top: -10px;">
-<div class="card-body">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4 mb-5">
-					<?=view('Dashboard/Pengguna/widgets/card-profil')?>
-				</div>
-				<div class="col-md-8 mb-5">
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="row mb-5">
-				<div class="col-md-6 mb-md-0 mb-5">
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-			<div class="row mb-5">
-				<div class="col-md-6 mb-md-0 mb-5">
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-		</div>
-		<div class="col-md-8">
-			<div class="row mb-5">
-				<div class="col-md-6 mb-5">
-				</div>
-				<div class="col-md-6 mb-5">
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-</div>
-</div>
+
+<?php
+$auth = Auth();
+$configWeb = configWeb();
+?>
+<!-- Hero -->
+<section class="section section bg-soft pb-5 overflow-hidden z-2">
+    <div class="container z-2">
+        <div class="row justify-content-center text-center pt-6">
+            <div class="col-lg-8 col-xl-8">
+            	<img src="<?=$configWeb->config_web_logo_light_url?>" alt="Cineex" height="100px">
+                <p class="lead px-md-6 mb-5">CodeIgniter Next & Extendable</p>
+                <div class="d-flex flex-column flex-wrap flex-md-row justify-content-md-center mb-5">
+                	<?php if ($auth!==false): ?>
+                    <a href="javascript:;" class="btn btn-danger mb-3 mb-lg-0 mr-3" onclick="logout()"><i class="bi bi-box-arrow-left"></i> Logout</a>
+                	<?php endif ?>
+                    <a href="https://github.com/as-shiddiq/cineex" target="_blank" class="btn btn-primary mb-3 mb-lg-0 mr-3"><i class="bi bi-command mr-2"></i> Install</a>
+                    <div class="mt-2">
+                        <a class="github-button" href="https://github.com/as-shiddiq/cineex" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star as-shiddiq/cineex on GitHub">Star</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?= $this->endSection() ?>
 
