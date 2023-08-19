@@ -77,7 +77,7 @@ class Cineex {
 
     function includeView($render='main',$file='')
     {
-        $include = FCPATH.'templates/'.getenv('app.template.'.$render).'/app/Layout/'.$file;
+        $include = FCPATH.'templates/'.getenv('cineex.template.'.$render).'/app/Layout/'.$file;
         return $include;
     }
 }

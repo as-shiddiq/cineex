@@ -84,6 +84,7 @@ class ModelGenerator extends BaseCommand
         $this->template  = 'model.tpl.php';
 
         $this->classNameLang = 'CLI.generator.className.model';
+        $params['fileName'] = $params[0];
         $this->execute($params);
     }
 
@@ -104,7 +105,7 @@ class ModelGenerator extends BaseCommand
 
         if($module=='')
         {
-            CLI::write("Controller can't create, --module is required", 'red');
+            CLI::write("Models can't create, --module is required", 'red');
             exit();
         }
         $select = "\$this->select(\$this->table.'.*')";
@@ -144,6 +145,11 @@ class ModelGenerator extends BaseCommand
             }
             $fields = implode(",",$fSave)."\n\t\t\t\t\t\t\t\t\t";
             $table = $getMigration['table'];
+        }
+        else
+        {
+            CLI::write("Models can't create, create migration first", 'red');
+            exit();
         }
 
         $baseClass = class_basename($class);

@@ -220,4 +220,36 @@ abstract class BaseCommand
     {
         return isset($this->{$key});
     }
+
+
+    function replacer($source, $destination) {
+
+        if(is_dir($source))
+        {
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
+            $dir = opendir($source);
+
+            while (($file = readdir($dir)) !== false) {
+                if ($file != '.' && $file != '..') {
+                    $sourcePath = $source . '/' . $file;
+                    $destinationPath = $destination . '/' . $file;
+
+                    if (is_dir($sourcePath)) {
+                        $this->replacer($sourcePath, $destinationPath);
+                    } else {
+                        CLI::write('Succesfully replace : '.CLI::color($destinationPath.'!','green'));
+                        copy($sourcePath, $destinationPath);
+                    }
+                }
+            }
+
+            closedir($dir);
+        }
+        else
+        {
+            copy($source,$destination);
+        }
+    }
 }

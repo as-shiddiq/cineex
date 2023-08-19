@@ -103,7 +103,6 @@ trait GeneratorTrait
     {
         $this->params = $params;
 
-            dd($params);
         // Get the fully qualified class name from the input.
         $class = $this->qualifyClassName();
         // Get the file path from class name.
@@ -263,6 +262,10 @@ trait GeneratorTrait
         {
             $class = $this->params['fileName'].'View';
         }
+        if($this->component=='Model')
+        {
+            $class = $this->params['fileName'].'Model';
+        }
         elseif(isset($this->params['fileName']))
         {
             $class = $this->params['fileName'];
@@ -280,7 +283,7 @@ trait GeneratorTrait
         if($this->component=='View')
         {
             $for = $this->getOption('for')??'dashboard';
-            $template = ucfirst(getenv('app.template.'.strtolower($for)));
+            $template = ucfirst(getenv('cineex.template.'.strtolower($for)));
             try {
                 return view("Public\\Templates\\{$template}\\App\\Views\\{$this->template}", $data, ['debug' => false]);
                 // return view(config('Generators')->views[$this->name], $data, ['debug' => false]);
@@ -292,12 +295,12 @@ trait GeneratorTrait
         else
         {
             try {
-                return view("App\\Cineex\\Commands\\Generators\\Views\\{$this->template}", $data, ['debug' => false]);
+                return view("\\Cineex\\Commands\\Generators\\Views\\{$this->template}", $data, ['debug' => false]);
                 // return view(config('Generators')->views[$this->name], $data, ['debug' => false]);
             } catch (Throwable $e) {
                 log_message('error', (string) $e);
 
-                return view("App\\Cineex\\Commands\\Generators\\Views\\{$this->template}", $data, ['debug' => false]);
+                return view("\\Cineex\\Commands\\Generators\\Views\\{$this->template}", $data, ['debug' => false]);
             }
         }
     }
