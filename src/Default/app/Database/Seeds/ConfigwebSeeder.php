@@ -22,10 +22,10 @@ class ConfigwebSeeder extends Seeder
                 'config_web_meta_keyword'=>'CodeIgniter, CMS, Website, Cineex',
                 'config_web_script_top'=>'',
                 'config_web_script_bottom'=>'',
-                'config_web_icon_light'=>'/assets/images/icon.png',
-                'config_web_icon_dark'=>'/assets/images/icon.png',
-                'config_web_logo_light'=>'/assets/images/logo.png',
-                'config_web_logo_dark'=>'/assets/images/logo-dark.png',
+                'config_web_icon_light'=>'icon.png',
+                'config_web_icon_dark'=>'icon.png',
+                'config_web_logo_light'=>'logo.png',
+                'config_web_logo_dark'=>'logo-dark.png',
             ]
         ];
        foreach ($ar as $k=>$v) {

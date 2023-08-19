@@ -47,7 +47,7 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
         //load helper template
-        $helperTemplates = FCPATH.'templates/'.env('app.template.dashboard').'/app/Helpers/template.php'; 
+        $helperTemplates = FCPATH.'templates/'.env('cineex.template.dashboard').'/app/Helpers/template.php'; 
         if(is_file($helperTemplates))
         {
             include $helperTemplates;

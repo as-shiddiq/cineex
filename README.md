@@ -7,7 +7,7 @@ Cineex is a framework that uses codeigniter 4 as its base, which makes it easy t
 ## What to use?
 Cineex uses an additional base in its manufacture :
 1. [CodeIgniter 4.3.7](https://codeigniter.com/)  
-2. [Metronic](https://keenthemes.com/metronic) or [Bootstrap 5](https://getbootstrap.com/) CSS Framework
+2. [NeomorphismeUI](https://themesberg.com/product/ui-kit/neumorphism-ui-kit-bootstrap) as CSS Framework
 3. [Dompdf](https://github.com/dompdf/dompdf) for pdf creation purposes, can be replaced if needed
 4. [UUID](https://github.com/ramsey/uuid) to create a uuid
 5. [WEBP Convert](https://github.com/rosell-dk/webp-convert) for image to webp convertion.
@@ -23,11 +23,11 @@ Cineex uses an additional base in its manufacture :
 
 ## How to Use?
 ### Installations
-Installation is very easy, just use composer :
+Installation is very easy, after create project with CodeIgniter then just use composer to install:
 ```console
 composer require as-shiddiq/cineex
 ```
-and after everything is installed please create a new file with the name `run` without an extension like `spark` on codeigniter
+next, create a new file with the name `run` without an extension like `spark` on codeigniter
 ```php
 <?php
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
