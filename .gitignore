@@ -5,4 +5,8 @@
 /modules/
 /vendor/
 composer.lock
+builds
 spark
+env
+phpunit.xml.dist
+preload.php
