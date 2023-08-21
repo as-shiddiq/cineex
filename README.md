@@ -49,4 +49,8 @@ then run the command, to replace the default codeigniter file
 php run replace:all
 
 ```
-after that configure the .env file as desired 
+after that configure the .env file as desired, and then run 
+```console
+php run install
+```
+to install and run the project

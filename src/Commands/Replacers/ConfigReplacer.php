@@ -7,7 +7,7 @@ use \CodeIgniter\Autoloader\FileLocator;
 use Config\Services;
 use Throwable;
 
-class AppGenerator extends BaseCommand
+class ConfigReplacer extends BaseCommand
 {
     use GeneratorTrait;
 	/**
@@ -23,21 +23,21 @@ class AppGenerator extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'replace:app';
+    protected $name = 'replace:config';
 
     /**
      * the Command's short description
      *
      * @var string
      */
-    protected $description = 'Replace default app CodeIgniter.';
+    protected $description = 'Replace default config CodeIgniter.';
 
     /**
      * the Command's usage
      *
      * @var string
      */
-    protected $usage = 'replace:app';
+    protected $usage = 'replace:config';
 
     /**
      * The Command's arguments
@@ -64,13 +64,13 @@ class AppGenerator extends BaseCommand
   	public function run(array $params)
     {
         $runner  = Services::commands();
-        $overwrite = CLI::prompt('Overwrite, default app CodeIgniter?', ['y', 'n']);
+        $overwrite = CLI::prompt('Overwrite, default config CodeIgniter?', ['y', 'n']);
         if($overwrite=='y')
         {
-            $sourceDirectory =  __DIR__.'/../../Templates/app';
-            $destinationDirectory = APPPATH;
+            $sourceDirectory =  __DIR__.'/../../Default/app/Config/';
+            $destinationDirectory = APPPATH.'/Config/';
             
-            $this->copyDirectory($sourceDirectory, $destinationDirectory);
+            $this->replacer($sourceDirectory, $destinationDirectory);
 
             $overwrite = CLI::write('Succesfully change default app!','green');
         }
@@ -80,27 +80,4 @@ class AppGenerator extends BaseCommand
         }
 
 	}
-
-    function copyDirectory($source, $destination) {
-        if (!is_dir($destination)) {
-            mkdir($destination, 0755, true);
-        }
-
-        $dir = opendir($source);
-
-        while (($file = readdir($dir)) !== false) {
-            if ($file != '.' && $file != '..') {
-                $sourcePath = $source . '/' . $file;
-                $destinationPath = $destination . '/' . $file;
-
-                if (is_dir($sourcePath)) {
-                    $this->copyDirectory($sourcePath, $destinationPath);
-                } else {
-                    copy($sourcePath, $destinationPath);
-                }
-            }
-        }
-
-        closedir($dir);
-    }
 }
