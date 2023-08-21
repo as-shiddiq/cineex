@@ -67,6 +67,30 @@ class AllReplacer extends BaseCommand
         $overwrite = CLI::prompt('Overwrite, default all default CodeIgniter?', ['y', 'n']);
         if($overwrite=='y')
         {
+            $sourceDirectory =  __DIR__.'/../../Default/.env';
+            $destinationDirectory = ROOTPATH.'/.env';
+            $this->replacer($sourceDirectory, $destinationDirectory);
+
+            $ar = ['dashboard','main'];
+            foreach ($ar as $k => $v) {
+                $dashboardTemplate = env('cineex.template.'.$v);
+                $sourceDirectoryTemplate =  __DIR__.'/../../Templates/'.$dashboardTemplate.'/Template';
+                $sourceDirectoryView =  __DIR__.'/../../Templates/'.$dashboardTemplate.'/Views/'.ucfirst($v);
+                $destinationDirectoryTemplate = ROOTPATH.'/public/templates/'.$dashboardTemplate;
+                $destinationDirectoryView = ROOTPATH.'/app/Views/'.ucfirst($v);
+
+                if(is_dir($sourceDirectoryTemplate))
+                {
+                    $this->replacer($sourceDirectoryTemplate, $destinationDirectoryTemplate);
+                }
+
+                if(is_dir($sourceDirectoryView))
+                {
+                    $this->replacer($sourceDirectoryView, $destinationDirectoryView);
+                }
+            }
+            
+
             $sourceDirectory =  __DIR__.'/../../Default';
             $destinationDirectory = ROOTPATH;
             
