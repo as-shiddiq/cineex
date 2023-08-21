@@ -239,6 +239,15 @@ abstract class BaseCommand
                     if (is_dir($sourcePath)) {
                         $this->replacer($sourcePath, $destinationPath);
                     } else {
+                        if(file_exists($destinationPath))
+                        {
+                            //check file is the config
+                            $clearText = preg_replace('/[\/\\\ ]/', '', $destinationPath);
+                            if (strpos($clearText,'appConfig') !== false) {
+                                rename($destinationPath,$destinationPath.'.bak');
+                                // CLI::write('Create backup file : '.CLI::color($destinationPath.'!','green'));
+                            }
+                        }
                         CLI::write('Succesfully replace : '.CLI::color($destinationPath.'!','green'));
                         copy($sourcePath, $destinationPath);
                     }

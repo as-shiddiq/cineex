@@ -99,8 +99,6 @@ class Install extends BaseCommand
         CLI::write('✅ Generating migration from modules.....');
         foreach (explode(',',env('PROJECT_MODULES')) as $file) {
             $nameSpace = 'Modules\\'.ucfirst($file);
-                    
-        var_dump($nameSpace);
             // var_dump($nameSpace);
             $runner->run('migrate',['n'=>$nameSpace]);
         }
