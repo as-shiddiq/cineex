@@ -1,2 +1,2 @@
 <?php
-include FCPATH.'templates/'.getenv('cineex.template.'.$render).'/_includes/layout/index.php';
+include FCPATH.'templates/'.env('cineex.template.'.$render).'/_includes/layout/index.php';

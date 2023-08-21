@@ -67,10 +67,10 @@ class TemplateReplacer extends BaseCommand
         $overwrite = CLI::prompt('Overwrite, template CodeIgniter?', ['y', 'n']);
         if($overwrite=='y')
         {
-            $sourceDirectory =  __DIR__.'/../../Default/public/templates';
-            $destinationDirectory = ROOTPATH.'/public/templates';
-            
-            $this->replacer($sourceDirectory, $destinationDirectory);
+            $ar = ['dashboard','main'];
+            foreach ($ar as $k => $v) {
+                $this->replacerTemplate($v);
+            }
             $overwrite = CLI::write('Succesfully changed!','green');
         }
         else
