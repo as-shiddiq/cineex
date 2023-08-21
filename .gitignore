@@ -4,6 +4,7 @@
 /writable/
 /modules/
 /vendor/
+/tests/
 composer.lock
 builds
 spark
