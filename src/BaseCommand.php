@@ -261,4 +261,91 @@ abstract class BaseCommand
             copy($source,$destination);
         }
     }
+
+    public function replacerTemplate($render,$reset=false)
+    {
+        $templateWritable =  ROOTPATH.'/writable/cineex/templates';
+        $templateName = env('cineex.template.'.$render);
+        $destinationTemplate = $templateWritable.'/'.$templateName;
+        //check theme in writable
+        if(!file_exists($templateWritable.'/'.$templateName))
+        {
+            //if not found check on vendor
+            $sourceTemplate = __DIR__.'/Templates/'.$templateName;
+            if(!file_exists($sourceTemplate))
+            {
+                $serverUrl = 'http://localhost:9090/'.$templateName.'.zip';
+                CLI::write('Trying download '.$templateName.' from server...','blue');
+                try {
+                    if(!is_dir($destinationTemplate))
+                    {
+                        mkdir($destinationTemplate, 0777, true);
+                    }
+                    $file_contents = file_get_contents($serverUrl);
+                    file_put_contents($destinationTemplate.'.zip', $file_contents);
+                    CLI::write('Extracting '.$templateName.'...','blue');
+                    // extracting zip file
+                    $zip = zip_open($destinationTemplate.'.zip');
+                    if ($zip) {
+                        while ($zip_entry = zip_read($zip)) {
+                            $entry_name = zip_entry_name($zip_entry);
+                            $entry_size = zip_entry_filesize($zip_entry);
+
+                            if (zip_entry_open($zip, $zip_entry, "r")) {
+                                $content = zip_entry_read($zip_entry, $entry_size);
+                                $fileSave = $destinationTemplate.'/'. $entry_name;
+                                // Menyimpan konten ekstrak (misalnya, dalam direktori $extracted_folder)
+                                if(count(explode('.',$entry_name))==1)
+                                {
+                                    if(!is_dir($fileSave))
+                                    {
+                                        mkdir($fileSave, 0777, true);
+                                    }
+                                }
+                                else
+                                {
+                                    file_put_contents($fileSave, $content);
+                                }
+                                zip_entry_close($zip_entry);
+                            }
+                        }
+                        zip_close($zip);
+                        unlink($destinationTemplate.'.zip');
+                        $this->replacerTemplate($render,false);
+                        return;
+                    }
+
+                } catch (\Exception $e) {
+                    CLI::write($e->getMessage(),'red');
+                    return ;
+                }
+            }
+            else
+            {
+                //copying from vendor file
+                $this->replacer($sourceTemplate, $destinationTemplate);
+                $this->replacerTemplate($render,false);
+                return;
+            }
+        }
+
+
+
+
+        $sourceTemplate = $destinationTemplate;
+        $sourceDirectoryTemplate =  $sourceTemplate.'/Template';
+        $sourceDirectoryView =  $sourceTemplate.'/Views/'.ucfirst($render);
+        $destinationDirectoryTemplate = ROOTPATH.'/public/templates/'.$templateName;
+        $destinationDirectoryView = ROOTPATH.'/app/Views/'.ucfirst($render);
+
+        if(is_dir($sourceDirectoryTemplate))
+        {
+            $this->replacer($sourceDirectoryTemplate, $destinationDirectoryTemplate);
+        }
+
+        if(is_dir($sourceDirectoryView))
+        {
+            $this->replacer($sourceDirectoryView, $destinationDirectoryView);
+        }
+    }
 }
