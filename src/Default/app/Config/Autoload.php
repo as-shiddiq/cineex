@@ -18,7 +18,7 @@ use CodeIgniter\Config\AutoloadConfig;
  */
 $psr4Load = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
-        // 'Public\\Templates' => ROOTPATH.'Public/Templates', // For custom app namespace
+        'Public\\Templates' => ROOTPATH.'Public/Templates',
         'Config'      => APPPATH . 'Config',
 ];
 $dirModule = array_diff(scandir(ROOTPATH.'modules'),['.','..']);

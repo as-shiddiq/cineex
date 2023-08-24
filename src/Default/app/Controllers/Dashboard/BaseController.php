@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['auth','app','nform','ntanggal'];
+    protected $helpers = ['auth','cineex','app','form','ntanggal'];
 
     /**
      * Constructor.

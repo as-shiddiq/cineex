@@ -13,7 +13,7 @@ class Restful extends ResourceController
     private $table;
     private $primaryKey;
     private $fillable;
-    protected $helpers = ['app', 'nform', 'ntanggal', 'responsedata','auth'];
+    protected $helpers = ['app', 'cineex', 'form', 'tanggal', 'responsedata','auth'];
 
     public function __construct()
     {

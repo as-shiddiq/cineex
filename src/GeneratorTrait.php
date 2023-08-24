@@ -257,20 +257,18 @@ trait GeneratorTrait
             return $class; // @codeCoverageIgnore
         }
 
-
         if($this->component=='View')
         {
             $class = $this->params['fileName'].'View';
         }
-        if($this->component=='Model')
+        else if($this->component=='Model')
         {
             $class = $this->params['fileName'].'Model';
         }
-        elseif(isset($this->params['fileName']))
+        else if(isset($this->params['fileName']))
         {
             $class = $this->params['fileName'];
         }
-
         return $namespace . $this->directory . '\\' . str_replace('/', '\\', $class);
     }
 
@@ -283,7 +281,7 @@ trait GeneratorTrait
         if($this->component=='View')
         {
             $for = $this->getOption('for')??'dashboard';
-            $template = ucfirst(getenv('cineex.template.'.strtolower($for)));
+            $template = ucfirst(env('cineex.template.'.strtolower($for)));
             try {
                 return view("Public\\Templates\\{$template}\\App\\Views\\{$this->template}", $data, ['debug' => false]);
                 // return view(config('Generators')->views[$this->name], $data, ['debug' => false]);
