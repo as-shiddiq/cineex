@@ -6,11 +6,13 @@
     "require": {
         "php": ">=7.4.0",
         "rosell-dk/webp-convert": "^2.9",
+        "firebase/php-jwt": "^5.2",
         "ramsey/uuid": "^4.0",
         "dompdf/dompdf": "^2.0"
     },
     "require-dev": {
         "codeigniter4/framework": "^4.0",
+        "firebase/php-jwt": "^5.2",
         "rosell-dk/webp-convert": "^2.9",
         "ramsey/uuid": "^4.0",
         "dompdf/dompdf": "^2.0"
