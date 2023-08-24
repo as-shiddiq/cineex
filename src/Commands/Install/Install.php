@@ -79,7 +79,7 @@ class Install extends BaseCommand
         }
         CLI::write('✅ Import modules names to database.....');
         $ModuleModel = new \App\Models\ModuleModel();
-        foreach (explode(',',getenv('PROJECT_MODULES')) as $file) {
+        foreach (explode(',',getenv('cineex.modules')) as $file) {
             $check = $ModuleModel->where('module_nama',ucfirst($file))->first();
             
             if($check==NULL)
@@ -97,14 +97,14 @@ class Install extends BaseCommand
         CLI::write('Module import completed','green');
 
         CLI::write('✅ Generating migration from modules.....');
-        foreach (explode(',',env('PROJECT_MODULES')) as $file) {
+        foreach (explode(',',env('cineex.modules')) as $file) {
             $nameSpace = 'Modules\\'.ucfirst($file);
             // var_dump($nameSpace);
             $runner->run('migrate',['n'=>$nameSpace]);
         }
         CLI::write('✅ Generating module seeder.....');
 
-        foreach (explode(',',env('PROJECT_MODULES')) as $file) {
+        foreach (explode(',',env('cineex.modules')) as $file) {
             $class = 'Modules\\'.ucfirst($file).'\\Database\\Seeds\\RunSeeder';
             
             if(class_exists($class))
