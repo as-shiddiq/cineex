@@ -81,7 +81,6 @@ class ViewGenerator extends BaseCommand
             CLI::error("Error : Controller not found : {$controller}");
             CLI::write("- Please create Controller before create Views",'yellow');
         }
-
         if($execute)
         {
             //collect the controller method
@@ -154,6 +153,7 @@ class ViewGenerator extends BaseCommand
         }
 
         $controller = 'Modules\\'.$module.'\\Controllers\\'.ucfirst($for).'\\'.ucfirst($this->params[0]);
+
         if(class_exists($controller))
         {
             if(method_exists($controller, 'sort'))

@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['module','nform'];
+    protected $helpers = ['cineex','module','form'];
 
     /**
      * Constructor.
@@ -49,8 +49,9 @@ abstract class BaseController extends Controller
         $this->moduleName = moduleName($class);
         $this->modulePath = modulePath($this->moduleName);
         $this->moduleClass = moduleClass($class);
+        $this->module = '{module}';
         //load helper template
-        $helperTemplates = FCPATH.'templates/'.env('app.template.dashboard').'/app/Helpers/template.php'; 
+        $helperTemplates = FCPATH.'templates/'.env('cineex.template.dashboard').'/app/Helpers/template.php'; 
         if(is_file($helperTemplates))
         {
             include $helperTemplates;

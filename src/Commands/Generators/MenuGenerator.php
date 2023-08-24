@@ -1,7 +1,7 @@
 <?php 
-namespace App\Cineex\Commands\Generators;
-use App\Cineex\BaseCommand;
-use App\Cineex\GeneratorTrait;
+namespace Cineex\Commands\Generators;
+use Cineex\BaseCommand;
+use Cineex\GeneratorTrait;
 use \CodeIgniter\CLI\CLI;
 use Config\Services;
 use Throwable;

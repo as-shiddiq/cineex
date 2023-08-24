@@ -102,6 +102,7 @@ class ModelGenerator extends BaseCommand
         $nestedParent  = '';
         $nestedSort  = '';
         $nestedText  = '';
+        $nested = false;
 
         if($module=='')
         {
@@ -136,10 +137,11 @@ class ModelGenerator extends BaseCommand
                 }
 
                 //check if nested here
-                if($v['nestedparent']??false==true && $v['nestedsort']??''!='')
+                if(($v['nestedparent']??false)==true && ($v['nestedsort']??'')!='')
                 {
                     $nestedParent = $k;
                     $nestedSort = $v['nestedsort'];
+                    $nested = true;
                 }
                 $fSave[] = "\n\t\t\t\t\t\t\t\t\t".'"'.$k.'"'; 
             }
@@ -188,6 +190,8 @@ class ModelGenerator extends BaseCommand
 
         return $this->parseTemplate($class, 
                 ['{table}', '{dbGroup}', '{return}', '{fields}','{select}','{setText}','{nestedParent}','{nestedSort}','{nestedText}'], 
-                [$table, $dbGroup, $return,$fields, $select, $setText,$nestedParent,$nestedSort,$nestedText]);
+                [$table, $dbGroup, $return,$fields, $select, $setText,$nestedParent,$nestedSort,$nestedText],
+                ['nested'=>$nested]
+            );
     }
 }

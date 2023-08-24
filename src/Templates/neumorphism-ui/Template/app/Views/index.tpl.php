@@ -70,7 +70,7 @@ else
 			<thead>
 				<tr>
 					<?=$thead?>
-					<th width="50px"></th>
+					<th width="100px"></th>
 				</tr>
 			</thead>
 		</table>

@@ -17,7 +17,7 @@
 
 		<!-- start form generated -->
 		<?=
-			view("Public\\Templates\\".getenv('app.template.'.$for)."\\App\\Views\\Loads\\form.tpl.php", ['fields'=>$fields], ['debug' => false]);
+			view("Public\\Templates\\".env('cineex.template.'.$for)."\\App\\Views\\Loads\\form.tpl.php", ['fields'=>$fields], ['debug' => false]);
 		?>
 	<!-- end form generated -->
 		<div class="row form-group">

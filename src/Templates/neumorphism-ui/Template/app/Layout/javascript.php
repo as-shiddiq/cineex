@@ -18,6 +18,7 @@
 <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/r-2.5.0/sl-1.7.0/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/assets/js/pristine/pristine.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 <script type="text/javascript">

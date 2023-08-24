@@ -128,6 +128,7 @@ class {class} extends Model
         }
     }
 
+<?php if($nested){ ?>
     function nestedData($id='')
     {
         $getData=$this->withAddons()->orderBy('{nestedSort}','ASC');
@@ -152,4 +153,5 @@ class {class} extends Model
                     ->update();
         }
     }
+<?php } ?>
 }

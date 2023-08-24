@@ -11,7 +11,7 @@ class Auth extends ResourceController
     private $table;
     private $primaryKey;
     private $fillable;
-    protected $helpers = ['app', 'nform', 'ntanggal', 'responsedata','auth','nnotif'];
+    protected $helpers = ['app', 'cineex', 'form', 'tanggal', 'responsedata','auth','nnotif'];
 
     public function __construct()
     {

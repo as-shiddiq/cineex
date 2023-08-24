@@ -11,7 +11,7 @@ class Join extends ResourceController
     private $table;
     private $primaryKey;
     private $fillable;
-    protected $helpers = ['app', 'nform', 'ntanggal', 'responsedata','auth'];
+    protected $helpers = ['app', 'form', 'ntanggal', 'responsedata','auth'];
 
     public function __construct()
     {

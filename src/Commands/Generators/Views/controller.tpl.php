@@ -11,7 +11,6 @@ class {class} extends {extends}
 <?php if ($for != 'api'): ?>
     public $url = '{controller}';
     private $title = '{controller}';
-    private $module = '{module}';
 
     public function __construct(){
     }
