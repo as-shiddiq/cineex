@@ -27,30 +27,16 @@ Installation is very easy, after create project with CodeIgniter then just use c
 ```console
 composer require as-shiddiq/cineex
 ```
-next, create a new file with the name `run` without an extension like `spark` on codeigniter
-```php
-<?php
-define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
-chdir(FCPATH);
-require FCPATH . '../app/Config/Paths.php';
-$paths = new Config\Paths();
-require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
-require_once SYSTEMPATH . 'Config/DotEnv.php';
-(new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
-$app = Config\Services::codeigniter();
-$app->initialize();
-$cli = new \Cineex\Console();
-$cli->run();
-die();
-
+next, copy file `run` as `spark` with command
+```console
+cp vendor\as-shiddiq\cineex\run run
 ```
 then run the command, to replace the default codeigniter file
 ```console
 php run replace:all
-
 ```
 after that configure the .env file as desired, and then run 
 ```console
 php run install
 ```
-to install and run the project
+to install and run the project 😊
