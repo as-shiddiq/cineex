@@ -103,7 +103,7 @@ class Profil extends BaseController
 	{
 		if($this->request->getPost())
 		{
-			$auth = Auth();
+			$auth = auth();
 			$data = $this->request->getPost();
 			$Pengguna = new \App\Models\PenggunaModel;
 			$rowPengguna = $Pengguna->where('id',$auth->id)->first();
@@ -137,7 +137,7 @@ class Profil extends BaseController
 	{
 		if($this->request->getPost())
 		{
-			$auth = Auth();
+			$auth = auth();
 			$data = $this->request->getPost();
 			$Pengguna = new \App\Models\PenggunaModel;
 			$Pegawai = new \App\Models\PegawaiModel;

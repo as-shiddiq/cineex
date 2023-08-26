@@ -78,7 +78,7 @@ class OutboxModel extends Model
 
     function insertData($data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
         if($auth!=false)
         {
@@ -97,7 +97,7 @@ class OutboxModel extends Model
 
     function updateData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
 
         if($auth!=false)
@@ -124,7 +124,7 @@ class OutboxModel extends Model
 
     function deleteData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             $check = $this->where('id',$id)->first();

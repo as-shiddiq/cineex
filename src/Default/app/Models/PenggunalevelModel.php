@@ -81,7 +81,7 @@ class PenggunalevelModel extends Model
     
     function insertData($data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             if($data==null)
@@ -106,7 +106,7 @@ class PenggunalevelModel extends Model
 
     function updateData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
              if($checkLevel->pengguna_level_nama=='Administrator')
@@ -142,7 +142,7 @@ class PenggunalevelModel extends Model
 
     function deleteData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             $checkLevel = $this->where('id',$id)->first();

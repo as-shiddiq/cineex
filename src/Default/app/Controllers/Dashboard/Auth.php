@@ -9,7 +9,7 @@ class Auth extends BaseController
 
     public function index()
     {
-      if(Auth()!=false)
+      if(auth()!=false)
       {
          return redirect()->to('dashboard');
       }

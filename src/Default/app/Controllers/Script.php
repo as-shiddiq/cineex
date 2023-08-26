@@ -9,7 +9,7 @@ class Script extends BaseController
 
     public function auth()
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!==false)
         {
             $data = $auth;

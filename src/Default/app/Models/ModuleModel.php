@@ -87,7 +87,7 @@ class ModuleModel extends Model
 
     function insertData($data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
         if($auth!=false)
         {
@@ -107,7 +107,7 @@ class ModuleModel extends Model
 
     function updateData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
 
         if($auth!=false)
@@ -132,7 +132,7 @@ class ModuleModel extends Model
 
     function deleteData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             $check = $this->where('id',$id)->first();

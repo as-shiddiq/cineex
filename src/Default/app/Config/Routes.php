@@ -82,10 +82,10 @@ $routes->get('/gis/overview', 'Gis::overview');
 
 $routes->group('api',[], static function ($routes) {
     $routes->get('auth/user', 'Api\Auth::user');
-    $routes->post('auth/logout', 'Api\Auth::logout');
-    $routes->post('auth/login', 'Api\Auth::login');
-    $routes->post('auth/logintest', 'Api\Auth::logintest');
-    $routes->post('auth/logintest/(:any)', 'Api\Auth::logintest/$1');
+    $routes->post('auth/signout', 'Api\Auth::signout');
+    $routes->post('auth/signin', 'Api\Auth::signin');
+    $routes->post('auth/signintest', 'Api\Auth::signintest');
+    $routes->post('auth/signintest/(:any)', 'Api\Auth::signintest/$1');
 
     $routes->get('restful/data/(:any)', 'Api\Restful::data/$1');
     $routes->get('restful/nested/(:any)', 'Api\Restful::nested/$1');

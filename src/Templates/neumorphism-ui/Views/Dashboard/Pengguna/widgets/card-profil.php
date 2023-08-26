@@ -1,5 +1,5 @@
 <?php 
-$auth  = Auth();
+$auth  = auth();
 ?>
 <!--begin::Engage widget 3-->
 <div class="card card-xxl-stretch h-100 bgi-no-repeat" style="background-color: #020c05; background-position: 0 calc(100% + 0.5rem); background-size: 100% auto; background-image:url('/templates/<?=getenv('cineex.template.dashboard')?>/assets/media/svg/general/rhone.svg')">

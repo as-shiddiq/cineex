@@ -42,7 +42,7 @@ class Restful extends ResourceController
 
     
     public function data($url="",$id='',...$args){
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
             $result=$model->getResult($id,$args);
@@ -151,7 +151,7 @@ class Restful extends ResourceController
     #######################################
 
     public function create($url=NULL){
-        $auth = Auth();
+        $auth = auth();
         if($auth!==false){
             // set model
             $model=$this->_setModel($url);
@@ -201,7 +201,7 @@ class Restful extends ResourceController
 
     public function update($url=NULL,$id=NULL){
         // set model
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
             if($this->request->getMethod()=="put"){
@@ -252,7 +252,7 @@ class Restful extends ResourceController
         $token=true;
        
 
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
             // set model
@@ -301,7 +301,7 @@ class Restful extends ResourceController
     ##            UNGGAH            ##
     ##################################
     public function upload($url='',...$dir){
-        $auth = Auth();
+        $auth = auth();
         $token=true;
         if(isset($token->user_id) || $token == true )
         {
@@ -376,7 +376,7 @@ class Restful extends ResourceController
 
     public function base64Image($url="",$id='',$lainnya=''){
         helper('text');
-        $auth = Auth();
+        $auth = auth();
         // set model
         if($auth!=false){
             $dir = FCPATH.'uploads/'.$url;
@@ -416,7 +416,7 @@ class Restful extends ResourceController
     ##            UNGGAH            ##
     ##################################
     public function createcsv(){
-        $auth = Auth();
+        $auth = auth();
         $token=true;
         if(isset($token->user_id) || $token == true )
         {

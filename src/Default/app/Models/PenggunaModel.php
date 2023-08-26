@@ -69,7 +69,7 @@ class PenggunaModel extends Model
     function withAddons($set='',$config=[]){
         if($this->auth==null)
         {
-            $this->auth = Auth();
+            $this->auth = auth();
         }
         $request = \Config\Services::request();
         $get = $this->select($this->table.'.*')
@@ -128,7 +128,7 @@ class PenggunaModel extends Model
     
     function insertData($data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             if($data==null)
@@ -162,7 +162,7 @@ class PenggunaModel extends Model
 
     function updateData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             if($data==null)
@@ -205,7 +205,7 @@ class PenggunaModel extends Model
 
     function deleteData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             $this->where($this->primaryKey,$id)

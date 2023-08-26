@@ -24,7 +24,7 @@ class Profil extends ResourceController
 
     public function update($url=NULL,$id=NULL){
         // set model
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false){
             $PenggunaModel=new \App\Models\PenggunaModel;
             // $MemberModel=new \App\Models\MemberModel;
