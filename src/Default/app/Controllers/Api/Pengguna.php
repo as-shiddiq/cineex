@@ -20,7 +20,7 @@ class Pengguna extends ResourceController
 
     public function reset(){
         // set model
-        $auth = Auth();
+        $auth = auth();
         if ($auth != false && $auth->pengguna_level_nama == 'Administrator') {
             if ($this->request->getMethod() == "put") {
                 $password = $this->request->getRawInput()['pengguna_password'] ?? '';

@@ -35,14 +35,51 @@ function publicKey()
     return $publicKey;
 }
 
-function Auth($ar=array())
+function auth($ar=array())
 {
     helper('app');
     helper('tanggal');
+    $request = \Config\Services::request();
     $PenggunaModel = new \App\Models\PenggunaModel();
-    if(session()->get('userId'))
+
+    //get token information
+    $authorization = $request->getServer('HTTP_AUTHORIZATION');
+    if($authorization!=null)
     {
-        $userId = session()->get('userId');
+        $getToken = explode(' ', $authorization);
+        if(count($getToken)>1){
+            $token = $getToken[1];
+        }
+    }
+    else if($request->getGet('token'))
+    {
+        $token = $request->getGet('token');
+    }
+    else
+    {
+        $token = session()->get('token');
+    }
+    //end get token information
+
+    //validating the token
+    if($token!=null && $token!='')
+    {
+
+        $decodeToken  = decodeToken($token);
+        if($decodeToken==false)
+        {
+            return false;
+        }
+        // validate the userID
+        if($decodeToken->userId=='' ||  $decodeToken->userId==null)
+        {
+            return false;
+        }
+    }
+    //end validating the token
+    if(isset($decodeToken))
+    {
+        $userId = $decodeToken->userId;
         $getPengguna = $PenggunaModel->select('pengguna.pengguna_username,
                                         pengguna.pengguna_foto,
                                         pengguna.id,
@@ -98,5 +135,69 @@ function Auth($ar=array())
             return false;
         }
     }
-    return false;
+    else
+    {
+        return false;
+    }
+}
+
+
+function setToken($config)
+{
+    $request = \Config\Services::request();
+    $configWeb = configWeb();
+    $issuer_claim = site_url();
+    $audience_claim = $configWeb->config_web_nama;
+    $issuedat_claim = time(); 
+    $notbefore_claim = $issuedat_claim;
+    if($request->getPost('remember')){
+        $expire_claim = $issuedat_claim + 72000; // expire time in seconds
+    }
+    else{
+        $expire_claim = $issuedat_claim + 36000; // expire time in seconds
+    }
+
+    if($request->getPost('from')=='mobile'){
+        $expire_claim = $issuedat_claim + 360000; // expire time in seconds
+    }
+
+    // if(isset($config['longsession']))
+    // {
+    //     $expire_claim = $issuedat_claim + $config['longsession']; // expire time in seconds
+    // }
+
+    $payload = [
+        "iss" => $issuer_claim,
+        "aud" => $audience_claim,
+        "iat" => $issuedat_claim,
+        "nbf" => $notbefore_claim,
+        "exp" =>$expire_claim,
+        "data" => [
+            "userId" => $config['id'],
+            "userLevel" => $config['level'],
+            "others" => $config
+        ]
+    ];
+
+    JWT::$leeway = 5;
+    //token
+    $token = JWT::encode($payload, privateKey(), 'RS256');
+    session()->set('token',$token);
+    return $token;
+}
+
+function decodeToken($token)
+{
+    $publicKey = publicKey();
+    try 
+    {
+        $decoded = JWT::decode($token, $publicKey, ['RS256']);
+        // $check=aksesLevel($url,$activity,$decoded->data->pengguna_level);
+        return $decoded->data;
+    } 
+    catch (\Exception $e)
+    {
+        return false;
+    }
+
 }

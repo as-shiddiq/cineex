@@ -5,7 +5,7 @@
 <?= $this->section('content') ?>
 
 <?php
-$auth = Auth();
+$auth = auth();
 $configWeb = configWeb();
 ?>
 <!-- Hero -->

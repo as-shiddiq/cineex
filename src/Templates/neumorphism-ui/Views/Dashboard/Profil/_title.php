@@ -1,6 +1,6 @@
 
 <?php 
-    $auth = Auth();
+    $auth = auth();
     $setId = '';
     $setWhere = '';
     if($penggunaId!='' && $auth->pengguna_level_nama=='Administrator' )

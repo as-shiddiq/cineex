@@ -3,6 +3,7 @@
 namespace App\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
+use \Firebase\JWT\JWT;
 
 class Auth extends ResourceController
 {
@@ -17,12 +18,13 @@ class Auth extends ResourceController
     {
     }
     
-    public function login(){
+    public function signin(){
         if($this->request->getMethod()=="post"){
             $PenggunaModel = new \App\Models\PenggunaModel();
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-            $getPengguna = $PenggunaModel->where('pengguna_username',$username)
+            $getPengguna = $PenggunaModel->withAddons()
+                                        ->where('pengguna_username',$username)
                                         ->orWhere('pengguna_email',$username)
                                         ->orWhere('pengguna_hp',$username)
                                         ->first();
@@ -39,13 +41,15 @@ class Auth extends ResourceController
                     if($getPengguna->pengguna_status=='A')
                     {
                         $PenggunaModel->update($getPengguna->id,['signed_at'=>timestamp()]);
-                        session()->set('userId',$getPengguna->id);
+                        $config['id'] = $getPengguna->id;
+                        $config['level'] = $getPengguna->pengguna_level_nama;
 
                         $response = [
                             'status' => 200,
                             'error' => false,
-                            'message' => "Akun ditemukan, klik ok untuk melanjutkan",
-                            'redirect' => site_url('dashboard/home')
+                            'message' => "Signin success, please click OK to continue",
+                            'redirect' => site_url('dashboard/home'),
+                            'token' => setToken($config)
                         ];
                     }
                     else if($getPengguna->pengguna_status=='N')
@@ -80,8 +84,9 @@ class Auth extends ResourceController
         return $this->respond($response, $response['status']);
     }
 
-    public function logout()
+    public function signout()
     {
+        JWT::invalidate(getToken());
         session()->destroy();
         $response = [
                         'status' => 200,
@@ -94,7 +99,7 @@ class Auth extends ResourceController
 
     public function user()
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!==false)
         {
 

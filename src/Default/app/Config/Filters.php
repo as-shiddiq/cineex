@@ -37,8 +37,8 @@ class Filters extends BaseConfig
             'auth' => ['except' => [ 
                 'auth',
                 'auth/*',
-                'api/auth',
-                'api/auth/*', 
+                'api',
+                'api/*', 
                 'sitemap.xml',
                 'beranda',
                 'cronjob/outbox'

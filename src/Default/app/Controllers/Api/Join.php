@@ -18,7 +18,7 @@ class Join extends ResourceController
     }
     
     public function module(){
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false){
             $ModuleModel = new \App\Models\ModuleModel();
             $resul = [];
@@ -66,7 +66,7 @@ class Join extends ResourceController
     }
 
     public function value(){
-        $auth = Auth();
+        $auth = auth();
         $table = $this->request->getGet('table');
         $text = $table.'_nama';
         if($auth!=false){
