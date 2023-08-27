@@ -86,7 +86,6 @@ class Auth extends ResourceController
 
     public function signout()
     {
-        JWT::invalidate(getToken());
         session()->destroy();
         $response = [
                         'status' => 200,

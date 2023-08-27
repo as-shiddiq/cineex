@@ -11,20 +11,17 @@
     else
     {
       $rowPengguna = $auth;
-      // $rowMember = $MemberModel->withAddons()
-      //                     ->select('IFNULL(((SELECT SUM(x.topup_nilai) as total FROM topup x WHERE x.member_id=member.id AND topup_status="A")-(SELECT SUM(x.usage_nilai) as total FROM `usage` x WHERE x.member_id=member.id AND usage_status="S")),0) as ballance')
-      //                     ->where('pengguna_id',$auth->id)->first();  
     }
 ?>  
-<div class="card mb-5 mb-xl-10">
-  <div class="card-body pt-9 pb-0">
+<div class="card mb-3">
+  <div class="card-body pt-0 pb-0">
     <!--begin::Details-->
     <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
       <!--begin: Pic-->
-      <div class="me-7 mb-4">
-        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-          <img src="<?=uploads('pengguna',$rowPengguna->pengguna_foto)?>" alt="image" />
-          <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+      <div class=" mr-3">
+        <div class=" position-relative">
+          <img src="<?=uploads('pengguna',$rowPengguna->pengguna_foto)?>" alt="image" width="80px" class="rounded"/>
+          <div class="position-absolute translate-middle bottom-0 start-100 mb-3 bg-success rounded-circle border border-4 border-white h-20px w-20px" style="margin-left: -20px;"></div>
         </div>
       </div>
       <!--end::Pic-->
@@ -35,16 +32,16 @@
           <!--begin::User-->
           <div class="d-flex flex-column">
             <!--begin::Name-->
-            <div class="d-flex align-items-center mb-2">
-              <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1"><?=$rowPengguna->pengguna_nama?></a>
+            <div class="d-flex align-items-center mb-1">
+              <a href="#" class="text-gray-900 text-hover-primary fw-bolder me-1" style="font-size: 20px;font-weight: bold;"><?=$rowPengguna->pengguna_nama?></a>
             </div>
             <!--end::Name-->
             <!--begin::Info-->
-            <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-              <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
-              <span class=" me-1 bi bi-check-circle"></span><?=$rowPengguna->pengguna_level_nama?></a>
-              <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
-              <span class="bi bi-envelope me-1"></span><?=$rowPengguna->pengguna_email??'null@admin.com'?></a>
+            <div class="d-flex flex-wrap fw-bold pe-2" style="gap:10px">
+              <a href="#" class="d-flex align-items-center text-hover-primary mr-3 mb-2">
+              <span class=" mr-1 bi bi-check-circle"></span><?=$rowPengguna->pengguna_level_nama?></a>
+              <a href="#" class="d-flex align-items-center text-hover-primary mb-2">
+              <span class="bi bi-envelope mr-1"></span><?=$rowPengguna->pengguna_email??'null@admin.com'?></a>
             </div>
           <?php if (isset($auth->has)): ?>
           <div class="alert bg-light-primary border border-primary border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-5">
@@ -130,41 +127,12 @@
     </div>
     <!--end::Details-->
     <!--begin::Navs-->
-    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+    <div class="d-flex align-items-center justify-content-left mt-5" style="gap: 10px;">
       <!--begin::Nav item-->
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 <?=$activeOverview??''?>" href="<?=site_url('dashboard/profil/index'.$setId)?>">Overview</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 <?=$activeSetting??''?>" href="<?=site_url('dashboard/profil/setting'.$setId)?>">Settings</a>
-      </li>
-
-      <?php if($rowPengguna->pengguna_level_nama=='Member') {
-      ?>
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 <?=$activeBilling??''?>" href="<?=site_url('dashboard/profil/billing'.$setId)?>">Billing</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 <?=$activeUsage??''?>" href="<?=site_url('dashboard/profil/usage'.$setId)?>">Usage</a>
-      </li>
-
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Statements</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Referrals</a>
-      </li>
-      <li class="nav-item mt-2">
-        <a href="<?=site_url('dashboard/profil/apikey'.$setId)?>" class="nav-link text-active-primary ms-0 me-10 py-5 <?=$activeApikey??''?>" href="#">API Key</a>
-      </li>
-      <?php
-      }                                
-        ?>
-      <!-- <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Logs</a>
-      </li> -->
+        <a class="btn btn-primary ms-0 me-10 py-2 <?=$activeOverview??''?>" href="<?=site_url('dashboard/profil/index'.$setId)?>">Overview</a>
+        <a class="btn btn-primary ms-0 me-10 py-2 <?=$activeSetting??''?>" href="<?=site_url('dashboard/profil/setting'.$setId)?>">Settings</a>
       <!--end::Nav item-->
-    </ul>
+    </div>
     <!--begin::Navs-->
   </div>
 </div>

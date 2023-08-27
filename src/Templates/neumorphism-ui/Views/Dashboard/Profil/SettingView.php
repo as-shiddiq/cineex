@@ -38,6 +38,9 @@
     border-radius: .42rem;
     border: 1px solid #e4e6ef;
   }
+  .image-input {
+    border-radius: 10px;
+  }
   .image-input label.btn {
     position: absolute;
     top: -12px;
@@ -62,7 +65,7 @@
   'url' => $url,
 ])?>
 <?php include '_title.php'?>
-  <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <div class="card mb-3 mb-xl-10" id="kt_profile_details_view">
       <!--begin::Card header-->
       <div class="card-header cursor-pointer">
         <!--begin::Card title-->
@@ -73,21 +76,21 @@
       </div>
       <!--begin::Card header-->
       <!--begin::Card body-->
-      <div class="card-body p-9">
+      <div class="card-body p-6">
         <!--begin::Form-->
         <form id="form-data" class="form">
           <!--begin::Card body-->
           <?=input_hidden('id','')?>
           <?=input_hidden('pengguna_foto','')?>
             <!--begin::Input group-->
-            <div class="row mb-6">
+            <div class="row mb-3">
               <!--begin::Label-->
               <label class="col-lg-4 col-form-label fw-bold fs-6">Foto Profil</label>
               <!--end::Label-->
               <!--begin::Col-->
               <div class="col-lg-8">
                 <!--begin::Image input-->
-                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/templates/metronic/assets/media/svg/avatars/blank.svg')">
+                <div class="image-input position-relative image-input-outline" data-kt-image-input="true" style="background-image: url('/assets/images/user.jpg');background-size:cover;height: 100px;width: 100px;">
                   <!--begin::Preview existing avatar-->
                   <div class="image-input-wrapper w-125px h-125px" style="background-image: url(<?=uploads('pengguna',$auth->pengguna_foto)?>)"></div>
                   <!--end::Preview existing avatar-->
@@ -98,12 +101,12 @@
                   </label>
                   <!--end::Label-->
                   <!--begin::Cancel-->
-                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                  <span class="d-none btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
                     <i class="bi bi-x fs-2"></i>
                   </span>
                   <!--end::Cancel-->
                   <!--begin::Remove-->
-                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                  <span class="d-none btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
                     <i class="bi bi-x fs-2"></i>
                   </span>
                   <!--end::Remove-->
@@ -117,7 +120,7 @@
             </div>
             <!--end::Input group-->
             <!--begin::Input group-->
-            <div class="row mb-6 ">
+            <div class="row mb-3 ">
               <label class="col-lg-4 col-form-label required fw-bold fs-6">Nama lengkap</label>
               <div class="col-lg-8">
                 <div class="row">
@@ -127,7 +130,7 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-6">
+            <div class="row mb-3">
               <label class="col-lg-4 col-form-label required fw-bold fs-6">Username</label>
               <div class="col-lg-8">
                 <div class="row">
@@ -137,7 +140,7 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-6">
+            <div class="row mb-3">
               <label class="col-lg-4 col-form-label fw-bold fs-6">Password</label>
               <div class="col-lg-8">
                 <div class="row">
@@ -154,7 +157,7 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-6">
+            <div class="row mb-3">
               <label class="col-lg-4 col-form-label required fw-bold fs-6">Ulangi password</label>
               <div class="col-lg-8">
                 <div class="row">
@@ -165,11 +168,11 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-6">
+            <div class="row mb-3">
               <label class="col-lg-4 col-form-label fw-bold fs-6"></label>
               <div class="col-lg-8">
 
-              <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+              <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-3">
                 <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
@@ -181,7 +184,7 @@
                   <div class="fw-bold">
                     <h4 class="text-gray-900 fw-bolder">Perhatian!</h4>
                     <div class="fs-6 text-gray-700">Silakan masukkan password untuk mengkonfirmasi perubahan</div>
-                    <div class="row mb-6 mt-3 pristine-validate">
+                    <div class="row mb-3 mt-3 pristine-validate">
                       <label class="col-lg-4 col-form-label required fw-bold fs-6">Ulangi Password</label>
                       <div class="col-lg-8">
                         <div class="row">
@@ -211,7 +214,7 @@
       <!--end::Content-->
     </div>
 
-    <div class="card-footer d-flex justify-content-end py-6 px-9">
+    <div class="card-footer d-flex justify-content-end py-3 px-6">
           <?=cardToolbar(['save','reset'])?>
     </div>
 </div>
@@ -228,9 +231,9 @@
       <!--begin::Modal header-->
       <div class="modal-header">
         <h3>Foto Profil</h3>
-        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-          <span class="bi bi-x"></span>
-        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
       </div>
       <!--end::Modal header-->
       <!--begin::Modal body-->
@@ -256,7 +259,7 @@
       </div>
       <div class="modal-footer">
         <button class="upload-result btn btn-primary d-none" type="button">Upload</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       <!--end::Modal body-->
     </div>
@@ -331,7 +334,7 @@
             .then(resp => {
             if(resp.status==200)
             {
-              document.querySelector('[data-bs-dismiss="modal"]').click();
+              document.querySelector('[data-dismiss="modal"]').click();
                 document.querySelector("[name=pengguna_foto]").value = resp.images;
                 upload.value = '';
                 uploadCrop.destroy();
