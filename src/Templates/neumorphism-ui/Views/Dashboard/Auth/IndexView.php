@@ -5,7 +5,7 @@ $configWeb = configWeb();
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<?php include includeView('main','head.php')?>
+		<?php include includeView('dashboard','head.php')?>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -127,7 +127,7 @@ $configWeb = configWeb();
 		        e.preventDefault();
 		        if(valid)
 		        {
-		        	let post = await fetch(`/api/auth/login`,{
+		        	let post = await fetch(`/api/auth/signin`,{
 		        		method : 'POST',
 		        		body:`username=${document.querySelector('[name=username]').value}&password=${document.querySelector('[name=password]').value}`,
 		        		headers: {
