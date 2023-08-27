@@ -10,7 +10,7 @@
 		                <!--end::Icon-->
 
 		                <!--begin::Info-->
-		                <div class="mt-5 text-center">
+		                <div class="mt-3 text-center">
 		                    <p class="fs-6 text-gray-900 mb-1">Drop files here or click to upload logo.</p>
 		                    <!-- <span class="fs-7 fw-bold text-gray-400">Maximal 1MB file size</span> -->
 		                </div>
@@ -32,7 +32,7 @@
 		                <!--end::Icon-->
 
 		                <!--begin::Info-->
-		                <div class="mt-5 text-center">
+		                <div class="mt-3 text-center">
 		                    <p class="fs-6 text-gray-900 mb-1">Drop files here or click to upload icon.</p>
 		                    <!-- <span class="fs-7 fw-bold text-gray-400">Drop here for Icon</span> -->
 		                </div>
@@ -56,7 +56,7 @@
 		                <!--end::Icon-->
 
 		                <!--begin::Info-->
-		                <div class="mt-5 text-center">
+		                <div class="mt-3 text-center">
 		                    <p class="fs-6 text-gray-900 mb-1">Drop files here or click to upload logo.</p>
 		                    <!-- <span class="fs-7 fw-bold text-gray-400">Maximal 1MB file size</span> -->
 		                </div>
@@ -78,7 +78,7 @@
 		                <!--end::Icon-->
 
 		                <!--begin::Info-->
-		                <div class="mt-5 text-center">
+		                <div class="mt-3 text-center">
 		                    <p class="fs-6 text-gray-900 mb-1">Drop files here or click to upload icon.</p>
 		                    <!-- <span class="fs-7 fw-bold text-gray-400">Drop here for Icon</span> -->
 		                </div>

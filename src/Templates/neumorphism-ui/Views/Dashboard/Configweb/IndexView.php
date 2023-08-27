@@ -1,6 +1,13 @@
 <?= $this->extend('DashboardView') ?>
 <?= $this->section('stylesheet') ?>
-
+<style type="text/css">
+	.dropzone {
+		border: 1px solid #fff;
+	}
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+		color: #444;
+	}
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -14,16 +21,16 @@
     <!--begin::Tabs-->
     <ul class="card-title pt-3 mb-0 gap-4 gap-lg-10 gap-xl-15 nav nav-tabs nav-line-tabs mb-5">
          <li class="nav-item">
-	        <a class="nav-link active" data-bs-toggle="tab" href="#info">Web Information</a>
+	        <a class="nav-link active" data-toggle="tab" href="#info">Web Information</a>
 	    </li>
 	    <li class="nav-item">
-	        <a class="nav-link" data-bs-toggle="tab" href="#logo">Icon & Logo</a>
+	        <a class="nav-link" data-toggle="tab" href="#logo">Icon & Logo</a>
 	    </li>
 	    <li class="nav-item">
-	        <a class="nav-link" data-bs-toggle="tab" href="#seo">SEO Optimation</a>
+	        <a class="nav-link" data-toggle="tab" href="#seo">SEO Optimation</a>
 	    </li>
 	    <li class="nav-item">
-	        <a class="nav-link" data-bs-toggle="tab" href="#setting">Settings</a>
+	        <a class="nav-link" data-toggle="tab" href="#setting">Settings</a>
 	    </li>
         <!--end::Tab item-->
     </ul>

@@ -266,7 +266,7 @@
     }
 
 
-    let logout = async () => {
+    let signout = async () => {
       Swal.fire({
           title: 'Apakah anda yakin?',
           html: "Untuk keluar, dan menghapus session",
@@ -278,7 +278,7 @@
           cancelButtonText: 'Batalkan'
         }).then((result) => {
           if (result.value) {
-          fetch(`${apiUrl}auth/logout`,{
+          fetch(`${apiUrl}auth/signout`,{
             method : "POST"
           })
           .then(resp => resp.json())
