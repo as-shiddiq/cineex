@@ -20,9 +20,9 @@
 ])?>
 <?php include '_title.php'?>
     <!--begin::details View-->
-    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <div class="card mb-3" id="kt_profile_details_view">
       <!--begin::Card header-->
-      <div class="card-header cursor-pointer">
+      <div class="card-header m-0 cursor-pointer d-flex align-items-center justify-content-between">
         <!--begin::Card title-->
         <div class="card-title m-0">
           <h3 class="fw-bolder m-0">Profile Details</h3>
@@ -34,9 +34,9 @@
       </div>
       <!--begin::Card header-->
       <!--begin::Card body-->
-      <div class="card-body p-9">
+      <div class="card-body px-4">
         <!--begin::Row-->
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
           <label class="col-lg-4 fw-bold text-muted">Full Name</label>
           <!--end::Label-->
@@ -47,7 +47,7 @@
           <!--end::Col-->
         </div>
         <!--begin::Row-->
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
           <label class="col-lg-4 fw-bold text-muted">Username</label>
           <!--end::Label-->
@@ -59,7 +59,7 @@
         </div>
         <!--end::Row-->
         <!--begin::Input group-->
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
           <label class="col-lg-4 fw-bold text-muted">Email</label>
           <!--end::Label-->
@@ -71,7 +71,7 @@
         </div>
         <!--end::Input group-->
         <!--begin::Input group-->
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
           <label class="col-lg-4 fw-bold text-muted">Contact Phone</label>
           <!--end::Label-->
@@ -83,7 +83,7 @@
         </div>
         <!--end::Input group-->
         <!--begin::Input group-->
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
           <label class="col-lg-4 fw-bold text-muted">User Level</label>
           <!--end::Label-->
@@ -94,7 +94,7 @@
           <!--end::Col-->
         </div>
         
-        <div class="row mb-7">
+        <div class="row mb-3">
           <!--begin::Label-->
             <label class="col-lg-4 fw-bold text-muted">Terdaftar pada</label>
             <!--end::Label-->

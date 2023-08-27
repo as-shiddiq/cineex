@@ -5,7 +5,7 @@ function contentOpen($config)
 	extract($config);
 
 	$btn = '';
-	foreach($configBtn as $Key => $value)
+	foreach($configBtn??[] as $Key => $value)
 	{
 		if($value =='add')
 		{
@@ -63,7 +63,7 @@ function contentOpen($config)
 			    </div>
 			</section>
 				<div id="kt_app_content" class="app-content flex-column-fluid">
-					<div id="kt_app_content_container" class="app-container container-fluid">';
+					<div id="kt_app_content_container" class="container ">';
 }
 
 function contentClose()

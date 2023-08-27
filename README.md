@@ -6,7 +6,7 @@ Cineex is a framework that uses codeigniter 4 as its base, which makes it easy t
 
 ## What to use?
 Cineex uses an additional base in its manufacture :
-1. [CodeIgniter 4.3.7](https://codeigniter.com/)  
+1. [CodeIgniter 4.4.0](https://codeigniter.com/)  
 2. [NeomorphismeUI](https://themesberg.com/product/ui-kit/neumorphism-ui-kit-bootstrap) as CSS Framework
 3. [Dompdf](https://github.com/dompdf/dompdf) for pdf creation purposes, can be replaced if needed
 4. [UUID](https://github.com/ramsey/uuid) to create a uuid
