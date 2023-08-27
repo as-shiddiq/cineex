@@ -26,7 +26,7 @@
                 <?php if ($auth===false): ?>
                 <a href="/auth" class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Login</a>
                 <?php else: ?>
-                <a href="javascript:;" class="btn btn-primary" onclick="logout()"><i class="bi bi-box-arrow-left"></i> Logout</a>
+                <a href="javascript:;" class="btn btn-primary" onclick="signout()"><i class="bi bi-box-arrow-left"></i> Logout</a>
                 <?php endif ?>
                 <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>

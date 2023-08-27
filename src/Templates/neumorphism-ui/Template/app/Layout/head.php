@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <!-- Pixel CSS -->
 <link type="text/css" href="/templates/<?=getenv('cineex.template.dashboard')?>/css/neumorphism.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 <style type="text/css">
 	.is-invalid .form-control {
 	    border-color: #F64E60;
@@ -75,6 +76,9 @@
 	    display: block;
 	    opacity: 1;
 	    pointer-events: all;
+	}
+	.fs-3x{
+		font-size: 6rem;
 	}
     @media(min-width:900px)
     {

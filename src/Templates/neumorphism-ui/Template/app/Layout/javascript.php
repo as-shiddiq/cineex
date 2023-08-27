@@ -19,6 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/assets/js/pristine/pristine.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 <script type="text/javascript">
