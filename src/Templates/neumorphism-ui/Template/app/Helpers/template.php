@@ -52,7 +52,7 @@ function contentOpen($config)
 			$btn .= $value;
 		}
 	}
-	return '<section class="section section bg-soft pb-5 overflow-hidden z-2">
+	return '<section class="section section bg-soft pb-3 overflow-hidden z-2">
 			    <div class="container z-2">
 			        <div class="row justify-content-center text-center pt-6">
 			            <div class="col-lg-8 col-xl-8">
@@ -63,7 +63,7 @@ function contentOpen($config)
 			    </div>
 			</section>
 				<div id="kt_app_content" class="app-content flex-column-fluid">
-					<div id="kt_app_content_container" class="container ">';
+					<div id="kt_app_content_container" class="container card bg-primary shadow-soft border-light px-4 py-4 mb-6 mt-3">';
 }
 
 function contentClose()
