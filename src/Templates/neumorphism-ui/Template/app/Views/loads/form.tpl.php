@@ -49,7 +49,7 @@
       }
       if($showInForm)
       {
-        $saveForm[] = '<div class="row form-group mb-5">
+        $saveForm[] = '<div class="row form-group mb-4">
       <label class="col-md-3 mb-3 m-md-auto">'.dashToUcwords($k).'</label>
       <div class="col-md-9 pristine-validate">
       '.$formType.'

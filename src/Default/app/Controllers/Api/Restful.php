@@ -158,13 +158,26 @@ class Restful extends ResourceController
             if($this->request->getPost()){
                 try {
                     $insert = $model->insertData();
-                    $response = [
-                        'status' => 200,
-                        'error' => false,
-                        'message' => "Data sukses ditambahkan",
-                        'validate'=>'true',
-                        'id'=>$insert['id']
-                    ];
+                    if($insert)
+                    {
+                        $response = [
+                            'status' => 200,
+                            'error' => false,
+                            'message' => "Data sukses ditambahkan",
+                            'validate'=>'true',
+                            'id'=>$insert['id']
+                        ];
+                    }
+                    else
+                    {
+                        $response = [
+                            'status' => 500,
+                            'error' => true,
+                            'message' => $model->errors(),
+                            'validate'=>'true',
+                            'id'=>null
+                        ];
+                    }
                 } catch (\Exception $e) {
                     $response = [
                         'status' => 500,
@@ -207,13 +220,27 @@ class Restful extends ResourceController
             if($this->request->getMethod()=="put"){
                 if($this->request->getRawInput()!=NULL){
                     try {
-                        $model->updateData($id);
-                        $response = [
-                            'status' => 200,
-                            'error' => false,
-                            'message' => "Data updated!",
-                            'validate'=>'true'
-                        ];
+                        $update = $model->updateData($id);
+                        if($update)
+                        {
+                            $response = [
+                                'status' => 200,
+                                'error' => false,
+                                'message' => "Data updated!",
+                                'validate'=>'true',
+                                'id'=>$update['id']
+                            ];
+                        }
+                        else
+                        {
+                            $response = [
+                                'status' => 500,
+                                'error' => true,
+                                'message' => $model->errors(),
+                                'validate'=>'true',
+                                'id'=>null
+                            ];
+                        }
                     } catch (\Exception $e) {
                         $response = [
                             'status' => 500,

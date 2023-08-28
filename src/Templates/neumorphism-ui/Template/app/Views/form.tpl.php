@@ -72,10 +72,13 @@
         e.preventDefault();
         if(valid)
         {
-          saveData('return').then(()=>{
-            setTimeout(()=>{
-          		window.location=`${siteUrl}${nowUrl}`
-            },500);
+         	saveData('return').then((resp)=>{
+          	if(resp.status==200)
+          	{
+	            setTimeout(()=>{
+	          		window.location=`${siteUrl}${nowUrl}`
+	            },500);
+          	}
           });
         }
     });
