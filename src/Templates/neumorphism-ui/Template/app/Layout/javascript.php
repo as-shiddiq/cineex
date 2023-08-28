@@ -20,6 +20,8 @@
 <script src="/assets/js/pristine/pristine.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.0/imask.js" integrity="sha512-Sazdn7HIk4NLR5lJrjlHXHm1LhcJsfxQqKKAk3d7/N5ISy06H3YeUX57JBd4/4sp5J6dDX+IKEB++pCNQDjZsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 <script type="text/javascript">
@@ -38,7 +40,22 @@ let elBtnDeleteMarked = document.querySelector('.btn-delete-marked');
 let elBtnRefresh = document.querySelector('.btn-refresh');
 let markedData = [];
 
+let opMask = {
+		  		mask: 'num',
+			    blocks: {
+			      num: {
+			        // nested masks are available!
+			        mask: Number,
+			        thousandsSeparator: '.',
+			        normalizeZeros: true, 
+			        radix: '.',
+			        mapToRadix: ['.'],
+					min: 0
+			      }
+			    }
+		  	}
 
+let masked = IMask.createMask(opMask);
 var langPristine = {
     required: "Bidang isian tidak boleh kosong",
     email: "Alamat Surel tidak benar",

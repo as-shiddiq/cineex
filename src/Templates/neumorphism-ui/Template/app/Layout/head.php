@@ -18,6 +18,7 @@
 <!-- Pixel CSS -->
 <link type="text/css" href="/templates/<?=getenv('cineex.template.dashboard')?>/css/neumorphism.css" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style type="text/css">
 	.is-invalid .form-control {
 	    border-color: #F64E60;
@@ -120,6 +121,54 @@
 		width: 50px;
 		height: 50px;
 		border-radius: 10px;
+	}
+	.select2-container--default .select2-selection--single{
+		display: block;
+	    width: 100%;
+	    height: calc(1.5em + 1.2rem + 0.0625rem);
+	    padding: 0.6rem 0.75rem;
+	    font-size: 1rem;
+	    font-weight: 300;
+	    line-height: 1.5;
+	    color: #44476a;
+	    background-color: #e6e7ee;
+	    background-clip: padding-box;
+	    border: 0.0625rem solid #d1d9e6;
+	    border-radius: 0.55rem;
+	    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+	    transition: all .3s ease-in-out;
+	    font-size: 1rem !important;
+	    border-radius: 0.55rem !important;
+	    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+	}
+	.select2-container--default .select2-selection--single .select2-selection__arrow {
+	    height: 26px;
+	    position: absolute;
+	    top: 6px;
+	    right: 6px;
+	    width: 20px;
+	}
+	.select2-container--default .select2-search--dropdown .select2-search__field{
+		display: block;
+	    width: 100%;
+	    height: calc(1.5em + 1.2rem + 0.0625rem);
+	    padding: 0.6rem 0.75rem;
+	    font-size: 1rem;
+	    font-weight: 300;
+	    line-height: 1.5;
+	    color: #44476a;
+	    background-color: #e6e7ee;
+	    background-clip: padding-box;
+	    border: 0.0625rem solid #d1d9e6;
+	    border-radius: 0.55rem;
+	    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+	    transition: all .3s ease-in-out;
+	    font-size: 1rem;
+	    border-radius: 0.55rem;
+	    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+	}
+	.select2-dropdown{
+		background: #e6e7ee;
 	}
     @media(min-width:900px)
     {
