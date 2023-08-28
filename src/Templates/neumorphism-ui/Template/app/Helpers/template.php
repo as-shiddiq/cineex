@@ -54,7 +54,7 @@ function contentOpen($config)
 	}
 	return '<section class="section section bg-soft pb-3 overflow-hidden z-2">
 			    <div class="container z-2">
-			        <div class="row justify-content-center text-center pt-6">
+			        <div class="row justify-content-center text-center pt-3">
 			            <div class="col-lg-8 col-xl-8">
 			                <h2 class="display-2 mb-3">'.$page.'</h2>
 			                <div class="d-flex align-items-center justify-content-center" style="gap:10px">'.$btn.'</div>
