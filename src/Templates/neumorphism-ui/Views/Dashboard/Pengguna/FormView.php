@@ -54,6 +54,7 @@
 	}
 	.image-input label.btn {
 		position: absolute;
+		z-index: 100;
 		top: -12px;
 		right: -12px;
 	}
@@ -77,7 +78,7 @@
 			<div class="col-md-3 pe-5">
 				<div class="image-input" >
 					<img src="/assets/images/default.png" class="pengguna_foto">
-					<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" onclick="showModal()" data-action="change" data-toggle="tooltip" title="" data-original-title="Ganti Foto">
+					<label class="btn btn-icon btn-circle w-25px h-25px btn-white btn-hover-text-primary btn-shadow" onclick="showModal()" data-action="change" data-toggle="tooltip" title="" data-original-title="Ganti Foto">
 						<i class="bi bi-pencil icon-md text-muted"></i>
 					</label>
 				</div>
@@ -88,14 +89,14 @@
 					<?= input_hidden('id', $id ?? '') ?>
 					<?= input_hidden('pengguna_foto', '', '', '') ?>
 					
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Nama lengkap</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Nama lengkap</label>
 						<div class="col-md-9 pristine-validate">
 							<?= input_text('pengguna_nama','', '', 'required') ?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Level</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Level</label>
 						<div class="col-md-9 pristine-validate">
 							<?php 
 								$PenggunalevelModel = new \App\Models\PenggunalevelModel();
@@ -108,32 +109,32 @@
 							<?=select('pengguna_level_id',$op,'','')?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Username</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Username</label>
 						<div class="col-md-9 pristine-validate">
 							<?= input_text('pengguna_username','', '', 'required') ?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Password</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Password</label>
 						<div class="col-md-9 pristine-validate">
 							<?= input_password('pengguna_password', '', '', '') ?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Email</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Email</label>
 						<div class="col-md-9 pristine-validate">
 							<?= input_text('pengguna_email', '', '', 'required') ?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">No. HP</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">No. HP</label>
 						<div class="col-md-9 pristine-validate">
 							<?= input_text('pengguna_hp', '', '', 'required') ?>
 						</div>
 					</div>
-					<div class="row form-group mb-5">
-						<label class="col-md-3 mb-3 m-md-auto">Status</label>
+					<div class="row form-group mb-4">
+						<label class="col-md-3 mb-4 m-md-auto">Status</label>
 						<div class="col-md-9 pristine-validate">
 							<?=select('pengguna_status',[
 								'A' => 'Aktif',
@@ -170,7 +171,7 @@
 				<!--begin::Modal body-->
 				<div class="modal-body">
 					<div class="upload-croppie">
-						<div class="form-group mb-3">
+						<div class="form-group mb-4">
 							<div class="custom-file">
 								<input type="file" id="upload" class="form-control" value="Choose a file" accept="image/*" />
 							</div>
@@ -183,7 +184,7 @@
 								<div id="croppie"></div>
 							</div>
 						</div>
-						<div class="form-group mb-3">
+						<div class="form-group mb-4">
 						</div>
 
 					</div>

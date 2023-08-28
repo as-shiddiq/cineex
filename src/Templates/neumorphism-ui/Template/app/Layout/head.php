@@ -80,6 +80,47 @@
 	.fs-3x{
 		font-size: 6rem;
 	}
+	.top-50{
+		top: 50%;
+	}
+	.end-0{
+		right: 0%;
+	}
+	.bottom-0{
+		bottom: 0%;
+	}
+	.start-100{
+		left: 100%;
+	}
+	.me-n2{
+		margin-right: 20px;
+	}
+	.h-20px{
+		height: 20px;
+	}
+	.h-25px{
+		height: 25px;
+	}
+	.w-25px{
+		width: 25px;
+	}
+	.w-20px{
+		width: 20px;
+	}
+	.btn-circle{
+		border-radius: 50%;
+	}
+	.btn-icon{
+		padding:0;
+	}
+	.translate-middle{
+		transform: translate(50%,-50%);
+	}
+	.symbol-50{
+		width: 50px;
+		height: 50px;
+		border-radius: 10px;
+	}
     @media(min-width:900px)
     {
 
