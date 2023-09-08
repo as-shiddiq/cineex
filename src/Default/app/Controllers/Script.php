@@ -19,5 +19,6 @@ class Script extends BaseController
             $data = false;
         }
         echo 'let auth = '.json_encode($auth);
+        $this->response->setHeader('Content-Type','application/javascript');
     }
 }
