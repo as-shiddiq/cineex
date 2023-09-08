@@ -40,7 +40,7 @@ $routes->set404Override();
 //         include $configRoutes;
 //     }
 // }
-if(getenv('app.template.main')=='false')
+if(getenv('cineex.template.main')=='false')
 {
     $routes->get('/', 'Dashboard\Home::index');
     $routes->get('/beranda', 'Dashboard\Home::index');
