@@ -46,10 +46,9 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
         // Preload any models, libraries, etc, here.
         $class = get_class($this);
-        $this->moduleName = moduleName($class);
-        $this->modulePath = modulePath($this->moduleName);
-        $this->moduleClass = moduleClass($class);
         $this->module = '{module}';
+        $this->modulePath = modulePath($this->module);
+        $this->moduleClass = moduleClass($class);
         //load helper template
         $helperTemplates = FCPATH.'templates/'.env('cineex.template.dashboard').'/app/Helpers/template.php'; 
         if(is_file($helperTemplates))
