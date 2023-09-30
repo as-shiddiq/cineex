@@ -67,20 +67,21 @@ class PenggunaModel extends Model
     private $auth;
 
     function withAddons($set='',$config=[]){
-        if($this->auth==null)
-        {
-            $this->auth = auth();
-        }
+        
         $request = \Config\Services::request();
         $get = $this->select($this->table.'.*')
                     ->select('pengguna_level_nama')
                     ->join('pengguna_level','pengguna.pengguna_level_id=pengguna_level.id');
-        if(isset($config['skiplevel']))
+       
+        if($this->auth!=false)
         {
-            foreach ($config['skiplevel'] as $r) {
-                $this->where('pengguna_level_nama !=',$r);
+            $this->auth = auth();
+            if($this->auth->pengguna_level_nama!='Administrator')
+            {
+                $get->where('pengguna.id',$this->auth->id);
             }
         }
+
         return $get;
     }
 
@@ -90,15 +91,6 @@ class PenggunaModel extends Model
 
         //ambil data 
         $PenggunalevelModel = new \App\Models\PenggunalevelModel();
-        $skipLevel = [];
-        foreach ($PenggunalevelModel->findAll() as $row) {
-            $modules = ucfirst($row->pengguna_level_nama);
-            $getModel = '\\Modules\\'.$modules.'\\Models\\'.$modules.'penggunaModel';
-            if(class_exists($getModel))
-            {
-                $skipLevel[] = $modules;
-            }
-        }
 
         $getData = $this->asArray();
         $config['skipColumn'] = [];
@@ -107,7 +99,6 @@ class PenggunaModel extends Model
         $config['id'] = $id;
         $config['table'] = $this->table;
         $config['debug'] = false;
-        $config['skiplevel'] = $skipLevel;
         $result = responseData($getData,$config);
         // echo $getData->getCompiledSelect();
         //set default
