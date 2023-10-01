@@ -222,6 +222,45 @@ abstract class BaseCommand
     }
 
 
+    function converter($source, $destination,$config,$check = true) {
+        // dd($source);
+        $dir = opendir($source);
+        if(!is_dir($destination))
+        {
+            mkdir($destination, 0755, true);
+        }
+        while (($file = readdir($dir)) !== false) {
+            if ($file != '.' && $file != '..' && $file !='Config') {
+                $sourcePath = $source . '/' . $file;
+                $destinationPath = $destination . '/' . $file;
+
+                if (is_dir($sourcePath)) {
+                    $this->converter($sourcePath, $destinationPath,$config);
+                } else {
+                    $fileContent = file_get_contents($sourcePath);
+                    $fileContent = str_replace('Modules\\'.$config['from'], 'Modules\\'.$config['to'], $fileContent);
+                    //check file is the config
+                    $clearText = preg_replace('/[\/\\\ ]/', '', $destinationPath);
+                    if (strpos($clearText,'appConfig') !== false) {
+                        rename($destinationPath,$destinationPath.'.bak');
+                        // CLI::write('Create backup file : '.CLI::color($destinationPath.'!','green'));
+                    }
+                    if(!file_exists($destinationPath))
+                    {
+                        CLI::write('Succesfully convert : '.CLI::color($destinationPath.'!','green'));
+                        file_put_contents($destinationPath, $fileContent);
+                    }
+                    else
+                    {
+                        CLI::write('Cancelled convert : '.CLI::color($destinationPath.'!','yellow').' file is exists');
+                    }
+                }
+            }
+        }
+
+        closedir($dir);
+    }
+
     function replacer($source, $destination) {
 
         if(is_dir($source))
