@@ -65,7 +65,7 @@ class {class} extends Model
 
     function insertData($data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
         if($auth!=false)
         {
@@ -88,7 +88,7 @@ class {class} extends Model
 
     function updateData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         $request = \Config\Services::request();
 
         if($auth!=false)
@@ -116,7 +116,7 @@ class {class} extends Model
 
     function deleteData($id=null,$data=null)
     {
-        $auth = Auth();
+        $auth = auth();
         if($auth!=false)
         {
             $this->where($this->primaryKey,$id)
