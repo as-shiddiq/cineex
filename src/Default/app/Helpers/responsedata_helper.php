@@ -106,28 +106,59 @@ function _where($getData, $config,$type='')
                 if ($value == '') {
                     $value = null;
                 }
-
-                $substr = substr($value, 0,1);
-                if($substr=='!')
+                if(is_array($value))
                 {
-                    $value = substr($value,1);
-                    if (in_array($key, _whereColumn($config))) {
-                        $getData->where($config['table'] . '.' . $key.' !=', $value);
-                    } else {
-                        if($type!=='base')
+                    foreach ($value as $k => $v) {
+                        $substr = substr($v, 0,1);
+                        if($substr=='!')
                         {
-                            $getData->where($key.' !=', $value);
+                            $v = substr($v,1);
+                            if (in_array($key, _whereColumn($config))) {
+                                $getData->where($config['table'] . '.' . $key.' !=', $v);
+                            } else {
+                                if($type!=='base')
+                                {
+                                    $getData->where($key.' !=', $v);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (in_array($key, _whereColumn($config))) {
+                                $getData->where($config['table'] . '.' . $key, $v);
+                            } else {
+                                if($type!=='base')
+                                {
+                                    $getData->where($key, $v);
+                                }
+                            }
                         }
                     }
                 }
                 else
                 {
-                    if (in_array($key, _whereColumn($config))) {
-                        $getData->where($config['table'] . '.' . $key, $value);
-                    } else {
-                        if($type!=='base')
-                        {
-                            $getData->where($key, $value);
+                    $substr = substr($value, 0,1);
+                    if($substr=='!')
+                    {
+                        $value = substr($value,1);
+                        if (in_array($key, _whereColumn($config))) {
+                            $getData->where($config['table'] . '.' . $key.' !=', $value);
+                        } else {
+                            if($type!=='base')
+                            {
+                                $getData->where($key.' !=', $value);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (in_array($key, _whereColumn($config))) {
+                            $getData->where($config['table'] . '.' . $key, $value);
+                        } else {
+                            if($type!=='base')
+                            {
+                                $getData->where($key, $value);
+                            }
                         }
                     }
                 }
