@@ -329,8 +329,7 @@ class Restful extends ResourceController
     ##################################
     public function upload($url='',...$dir){
         $auth = auth();
-        $token=true;
-        if(isset($token->user_id) || $token == true )
+        if($auth!=false )
         {
             $file = $this->request->getFile('file');
             if(count($dir)>0)
@@ -342,58 +341,89 @@ class Restful extends ResourceController
                 $dir = $url;
             }
             $newName = $file->getRandomName();
-            $validated = $this->validate([
-                'file' => [
-                    'uploaded[file]',
-                    'mime_in[file,jpg,image/jpeg,image/gif,application/pdf]',
-                    'max_size[file,4096]',
-                ],
-            ]);
-            if ($file->isValid() && ! $file->hasMoved())
-            {
-                $file->move(FCPATH.'uploads/'.$dir.'/', $newName);
-                $fileUrl = base_url('uploads/'.$dir.'/'.$newName);
-                //
-                if($this->request->getPost('compress'))
-                {
-                    $image = \Config\Services::image();
-                    $targetCompress = FCPATH.'uploads/'.$dir.'/compress';
-                    if(!file_exists($targetCompress))
-                    {
-                        mkdir($targetCompress);
-                    }
-                    $image->withFile(FCPATH.'uploads/'.$dir.'/'.$newName)
-                                ->save(FCPATH.'uploads/'.$dir.'/compress/'.$newName, 80);
-                    $fileUrl = base_url('uploads/'.$dir.'/compress/'.$newName);
-                }
 
-                $response = [
-                    'status' => 200,
-                    'error' => false,
-                    'message' => 'Unggah sukses dilakukan',
-                    'file'=> $newName,
-                    'file_url'=> $fileUrl,
-                ];
-                if($auth->pengguna_level_nama!=='Administrator')
+
+            if($url=='pendudukdokumen')
+            {
+                $configValidate = [
+                 'file' => [
+                    'uploaded[file]',
+                    'mime_in[file,jpg,image/jpeg,image/gif,image/png,application/pdf]',
+                    'max_size[file,4096]',
+                ]];
+            }
+            else
+            {
+                $configValidate = [
+                 'file' => [
+                    'uploaded[file]',
+                    'mime_in[file,jpg,image/jpeg,image/gif,image/png,application/pdf]',
+                    'max_size[file,4096]',
+                ]];
+            }
+
+            $validated = $this->validate($configValidate);
+            if($validated)
+            {
+                if ($file->isValid() && ! $file->hasMoved())
                 {
-                    unset($response['file_url']);
+                    $file->move(FCPATH.'uploads/'.$dir.'/', $newName);
+                    $fileUrl = base_url('uploads/'.$dir.'/'.$newName);
+                    //
+                    if($this->request->getPost('compress'))
+                    {
+                        $image = \Config\Services::image();
+                        $targetCompress = FCPATH.'uploads/'.$dir.'/compress';
+                        if(!file_exists($targetCompress))
+                        {
+                            mkdir($targetCompress);
+                        }
+                        $image->withFile(FCPATH.'uploads/'.$dir.'/'.$newName)
+                                    ->save(FCPATH.'uploads/'.$dir.'/compress/'.$newName, 80);
+                        $fileUrl = base_url('uploads/'.$dir.'/compress/'.$newName);
+                    }
+
+                    $response = [
+                        'status' => 200,
+                        'error' => false,
+                        'message' => 'Unggah sukses dilakukan',
+                        'file'=> $newName,
+                        'file_url'=> $fileUrl,
+                    ];
+                    // if($auth->pengguna_level_nama!=='Administrator')
+                    // {
+                    //     unset($response['file_url']);
+                    // }
+                    return $this->respond($response, 200);
                 }
-                return $this->respond($response, 200);
+                else{
+                    $response = [
+                        'status' => 200,
+                        'error' => true,
+                        'message' => $file->errors(),
+                        'file'=> ''
+                    ];
+                }
             }
-            else{
+            else
+            {
                 $response = [
-                    'status' => 200,
+                    'status' => 500,
                     'error' => true,
-                    'message' => $file->errors(),
-                    'file'=> ''
+                    'message' => 'Maaf format file yang diunggah salah',
                 ];
-                return $this->respond($response, 200);
             }
+            
         }
         else
         {
-            return $this->respond($token, $token['status']);
+            $response = [
+                'status' => 401,
+                'error' => false,
+                'message' => "Sorry, Unauthorize!!😢",
+            ];
         }
+        return $this->respond($response, $response['status']);
     }
 
 
@@ -479,10 +509,10 @@ class Restful extends ResourceController
                     'file'=> $randomName,
                     'file_url'=> site_url($dir.$randomName),
                 ];
-                if($auth->pengguna_level_nama!=='Administrator')
-                {
-                    unset($response['file_url']);
-                }
+                // if($auth->pengguna_level_nama!=='Administrator')
+                // {
+                //     unset($response['file_url']);
+                // }
             } catch (\Exception $e) {
                 die();
                 $response = [
