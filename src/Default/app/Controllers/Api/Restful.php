@@ -343,7 +343,7 @@ class Restful extends ResourceController
             $newName = $file->getRandomName();
 
 
-            if($url=='pendudukdokumen')
+            if($url=='userlevel')
             {
                 $configValidate = [
                  'file' => [
@@ -410,7 +410,7 @@ class Restful extends ResourceController
                 $response = [
                     'status' => 500,
                     'error' => true,
-                    'message' => 'Maaf format file yang diunggah salah',
+                    'message' => $this->validator->getErrors()['file'],
                 ];
             }
             
