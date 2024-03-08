@@ -9,7 +9,8 @@ function responseData($model, $config = [])
     $getData = _where($getData, $config);
     $getData = _sort($getData, $config);
     if ($config['debug']) {
-        echo $getData->getCompiledSelect();
+        $getData->first();
+        dd($getData->getLastQuery());
     }
     $data = _findAll($getData);
     //get filtered
