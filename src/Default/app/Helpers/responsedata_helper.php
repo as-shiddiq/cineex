@@ -180,11 +180,12 @@ function _where($getData, $config,$type='')
 function _query($getData, $config)
 {
     $request = \Config\Services::request();
+    $_whereColumn = _whereColumn($config);
     if ($request->getGet('search')) {
         if (isset($request->getGet('search')['value'])) {
             $search = $request->getGet('search')['value'];
             $getData->groupStart();
-            foreach (_whereColumn($config) as $key => $value) {
+            foreach ($_whereColumn as $key => $value) {
                 if (!in_array($value, _skipColumn($config['skipColumn']))) {
                     if(in_array($value,$config['column']))
                     {
@@ -201,8 +202,15 @@ function _query($getData, $config)
             if (is_array($request->getGet('search'))) {
                 $search = $request->getGet('search');
                 $getData->groupStart();
+                //check search compare with field table
                 foreach ($search as $key => $value) {
-                    $getData->orLike($config['table'] . '.' . $key, $value);
+                     if (in_array($key, $_whereColumn)) {
+                        $getData->orLike($config['table'] . '.' . $key, $value);
+                     }
+                     else
+                     {
+                        $getData->orLike($key, $value);
+                     }
                 }
                 $getData->groupEnd();
             } else {
