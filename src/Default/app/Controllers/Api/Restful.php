@@ -74,10 +74,8 @@ class Restful extends ResourceController
 
     public function nested($url = NULL, $id = '')
     {
-        $token = true;
-        // set model
-        if($token === true){
-            // set model
+        $auth = auth();
+        if($auth != false){
             $model = $this->_setModel($url);
             $data = $model->nestedData($id);
             $response = [
@@ -87,7 +85,6 @@ class Restful extends ResourceController
                 'data' => $data,
             ];
         } else {
-
             $response = [
                 'status' => 401,
                 'error' => false,
@@ -102,9 +99,8 @@ class Restful extends ResourceController
     #######################################
 
     public function updatenested($url=NULL,$id=NULL){
-        // set model
-        $auth=true;
-        if($auth===true){
+        $auth = auth();
+        if($auth!=false){
             $model=$this->_setModel($url);
             if($this->request->getMethod()=="put"){
                 if($this->request->getRawInput()!=NULL){
@@ -276,27 +272,26 @@ class Restful extends ResourceController
     ##################################
 
     public function delete($url="",$id=""){
-        $token=true;
-       
-
         $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
-            // set model
             if($this->request->getMethod()=="delete"){
                 try {
-                 if($this->request->getRawInput()!=NULL){
+                    if($this->request->getRawInput()!=NULL){
                         $id=$this->request->getRawInput()['id'];
-                        $ex=explode(',', $id);
-                        foreach ($ex as $key => $value) {
-                            $model->deleteData($value);
-                        }
-                        $response = [
-                            'status' => 200,
-                            'error' => false,
-                            'message' => 'Data yang dipilih telah dihapus'
-                        ];
-                 }
+                    }
+                    else if($this->request->getGet('id')!=NULL){
+                        $id=$this->request->getGet('id');
+                    }
+                    $ex=explode(',', $id);
+                    foreach ($ex as $key => $value) {
+                        $model->deleteData($value);
+                    }
+                    $response = [
+                        'status' => 200,
+                        'error' => false,
+                        'message' => 'Data yang dipilih telah dihapus'
+                    ];
                 } catch (\Exception $e) {
                     $response = [
                         'status' => 500,
@@ -324,6 +319,7 @@ class Restful extends ResourceController
         }
         return $this->respond($response, $response['status']);
     }
+    
     ##################################
     ##            UNGGAH            ##
     ##################################
@@ -342,7 +338,7 @@ class Restful extends ResourceController
             }
             $newName = $file->getRandomName();
 
-
+            //configuration for validation by URL/Path
             if($url=='userlevel')
             {
                 $configValidate = [
@@ -434,7 +430,6 @@ class Restful extends ResourceController
     public function base64Image($url="",$id='',$lainnya=''){
         helper('text');
         $auth = auth();
-        // set model
         if($auth!=false){
             $dir = FCPATH.'uploads/'.$url;
             if(!file_exists($dir))
@@ -447,8 +442,6 @@ class Restful extends ResourceController
             $data = base64_decode($img);
             $imageName = random_string('alnum',16).date('ymdhis').'.png';
             file_put_contents($dir.'/'.$imageName, $data);
-
-
             $response = [
                     'status' => 200,
                     'error' => false,
@@ -474,8 +467,7 @@ class Restful extends ResourceController
     ##################################
     public function createcsv(){
         $auth = auth();
-        $token=true;
-        if(isset($token->user_id) || $token == true )
+        if($auth != false)
         {
             $dir = '';
             if($this->request->getGet('dir'))
