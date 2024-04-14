@@ -529,4 +529,82 @@ class Restful extends ResourceController
         return $this->respond($response, $response['status']);
     }
 
+
+    // importing data by json with name "data
+    public function importjson($url="",$id=""){
+        $auth = auth();
+        if($auth!=false){
+            $model=$this->_setModel($url);
+            // set model
+            if($this->request->getMethod()=="post"){
+                try {
+                    $model->importJSON();
+                    $response = [
+                        'status' => 200,
+                        'error' => false,
+                        'message' => 'Data yang dikirim berhasil diimport'
+                    ];
+                } catch (\Exception $e) {
+                    $response = [
+                        'status' => 500,
+                        'error' => true,
+                        'message' => $e->getMessage()
+                    ];
+                }
+            }
+            else{
+                $response = [
+                    'status' => 500,
+                    'error' => false,
+                    'message' => "Method harus dalam bentuk POST",
+                ];
+                return $this->respond($response, 200);
+            }
+        }
+        else{
+            $response = [
+                'status' => 401,
+                'error' => true,
+                'message' => "Sorry, Unauthorize!!😢",
+                'validate'=>'false'
+            ];
+        }
+        return $this->respond($response, $response['status']);
+
+        /** EXAMPLE MODEL **/
+
+        // function importJSON()
+        // {
+        //     $request = \Config\Services::request();
+        //     $auth = auth();
+        //     if($auth!=false)
+        //     {
+        //         $get = $request->getJSON();
+        //         foreach ($get as $k => $r) {
+        //             // try importing
+        //            $data = [
+        //                 "id" => uuid(),
+        //                 "kode" => $r[0]??'',
+        //             ];
+        //             $check = $this->where('kode',$data['kode'])
+        //                             ->first();
+        //             if($check==NULL)
+        //             {
+        //                 $this->insert($data);
+        //             }
+        //             else
+        //             {
+        //                 unset($data['id']);
+        //                 $this->where('id',$check->id)
+        //                         ->set($data)
+        //                         ->update();
+        //             }
+        //         }
+        //     }
+        //     else{
+        //         throw new \Exception('Maaf anda tidak memiliki akses');
+        //     }
+        // }
+    }
+
 }
