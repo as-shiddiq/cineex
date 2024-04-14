@@ -93,6 +93,7 @@ $routes->group('api',[], static function ($routes) {
     $routes->post('restful/create/(:any)', 'Api\Restful::create/$1');
     $routes->post('restful/upload/(:any)', 'Api\Restful::upload/$1');
     $routes->post('restful/upload/(:any)/(:any)', 'Api\Restful::upload/$1/$2');
+    $routes->post('restful/importjson/(:any)', 'Api\Restful::importjson/$1');
     $routes->post('restful/base64image/(:any)', 'Api\Restful::base64image/$1');
     $routes->post('restful/base64image/(:any)/(:any)', 'Api\Restful::base64image/$1/$2');
     $routes->post('restful/createcsv', 'Api\Restful::createcsv');
