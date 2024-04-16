@@ -72,6 +72,8 @@ $routes->get('/dashboard/penggunalevel', 'Dashboard\Penggunalevel::index');
 $routes->get('/dashboard/penggunalevel/form', 'Dashboard\Penggunalevel::form');
 $routes->get('/dashboard/penggunalevel/form/(:any)', 'Dashboard\Penggunalevel::form/$1');
 
+$routes->get('/dashboard/cronjob', 'Dashboard\Cronjob::index');
+
 $routes->get('/dashboard/outbox', 'Dashboard\Outbox::index');
 $routes->get('/dashboard/outbox/preview', 'Dashboard\Outbox::preview');
 $routes->get('/dashboard/outbox/preview/(:any)', 'Dashboard\Outbox::preview/$1');
