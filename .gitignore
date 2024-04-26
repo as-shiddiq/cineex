@@ -12,3 +12,4 @@ env
 .env
 phpunit.xml.dist
 preload.php
+.DS_store
