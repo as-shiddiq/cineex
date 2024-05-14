@@ -8,31 +8,32 @@ function responseData($model, $config = [])
     $getData = _query($getData, $config);
     $getData = _where($getData, $config);
     $getData = _sort($getData, $config);
+    $data = _findAll($getData);
     if ($config['debug']) {
-        $getData->first();
         dd($getData->getLastQuery());
     }
-    $data = _findAll($getData);
     //get filtered
     // $getData = $model;
-    $getData = $model->withAddons(['base'=>true],$config);
-    $getData = _query($getData, $config);
-    $getData =_where($getData, $config);
-    $result = _findAll($getData, false);
-    $meta['total_filtered'] = count($result);
+    //jika pakai ID
+    if ( $config['id'] == 'all' || $config['id'] == '') {
+        $getData = $model->select('COUNT(*) as filtered');
+        $getData = _query($getData, $config);
+        $getData =_where($getData, $config);
+        $result = $getData->first();
+        $meta['total_filtered'] = $result->filtered;
 
-    //set meta 
-    if ($request->getGet('start') && $request->getGet('length')) {
-        $meta['start'] = $request->getGet('start');
-        $meta['length'] = $request->getGet('length');
+        //set meta 
+        if ($request->getGet('start') && $request->getGet('length')) {
+            $meta['start'] = $request->getGet('start');
+            $meta['length'] = $request->getGet('length');
+        }
+        $meta['total'] = $request->getGet('length')??0;
     }
-
-    $getData = $model->withAddons(['base'=>true], $config);
-    $getData = _where($getData, $config);
-    $getData = _query($getData, $config);
-
-    $result = _findAll($getData);
-    $meta['total'] = count($result);
+    else
+    {
+        $meta['total_filtered'] = 1;
+        $meta['total'] = 1;
+    }
 
     return [
         'data' => $data,
@@ -224,6 +225,20 @@ function _query($getData, $config)
             }
         }
     }
+
+    //if search by column 
+    $columns = $request->getGet('columns')??[];
+    foreach ($columns as $key => $value) {
+        if($value['searchable']=='true')
+        {
+            $search = $value['search']['value'];
+            if($search!='')
+            {
+                $getData->like($value['name'], $search);
+            }
+        }
+    }
+
     return $getData;
 }
 
