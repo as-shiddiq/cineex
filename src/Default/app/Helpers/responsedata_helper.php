@@ -12,7 +12,6 @@ function responseData($model, $config = [])
     if ($config['debug']) {
         dd($getData->getLastQuery());
     }
-    //get filtered
     // $getData = $model;
     //jika pakai ID
     if ( $config['id'] == 'all' || $config['id'] == '') {
