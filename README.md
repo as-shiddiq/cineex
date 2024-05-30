@@ -29,8 +29,26 @@ composer require as-shiddiq/cineex
 ```
 next, copy file `run` as `spark` with command
 ```console
-cp vendor\as-shiddiq\cineex\run run
+cp vendor/as-shiddiq/cineex/run run
 ```
+
+if you dont install codeigniter default, copy directory default codeigniter
+```console
+cp -r vendor/codeigniter4/framework/public public
+```
+```console
+cp -r vendor/codeigniter4/framework/app app
+```
+```console
+cp -r vendor/codeigniter4/framework/writable writable
+```
+then change path config on `app\Config\Paths.php`
+```php
+public string $systemDirectory = __DIR__ . '/../../vendor/codeigniter4/framework/system';
+
+```
+
+
 then run the command, to replace the default codeigniter file
 ```console
 php run replace:all
