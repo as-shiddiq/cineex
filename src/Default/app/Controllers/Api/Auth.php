@@ -19,7 +19,7 @@ class Auth extends ResourceController
     }
     
     public function signin(){
-        if($this->request->getMethod()=="post"){
+        if(strtolower($this->request->getMethod())=="post"){
             $PenggunaModel = new \App\Models\PenggunaModel();
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');

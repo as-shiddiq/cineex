@@ -22,7 +22,7 @@ class Pengguna extends ResourceController
         // set model
         $auth = auth();
         if ($auth != false && $auth->pengguna_level_nama == 'Administrator') {
-            if ($this->request->getMethod() == "put") {
+            if (strtolower($this->request->getMethod()) == "put") {
                 $password = $this->request->getRawInput()['pengguna_password'] ?? '';
                 $id = $this->request->getRawInput()['id'] ?? '';
                 if ($password != '' && $id != '') {
