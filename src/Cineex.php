@@ -8,11 +8,43 @@
 ###########################################################
 namespace Cineex;
 
+use CodeIgniter\CodeIgniter;
+
 class Cineex {
+
+    protected $ciApp;
+
+    public function __construct(CodeIgniter $app = null)
+    {
+        if($app!==null)
+        {
+            $this->ciApp = $app;
+        }
+    }
+
+    public function setContext(string $context)
+    {
+        $this->ciApp->setContext($context);
+    }
 
     function pathModule()
     {
         return ROOTPATH.'modules/';
+    }
+    
+    public function showHeader(bool $suppress = false)
+    {
+        if ($suppress) {
+            return;
+        }
+
+        CLI::write(sprintf(
+            'CodeIgniter v%s Command Line Tool - Server Time: %s UTC%s',
+            CodeIgniter::CI_VERSION,
+            date('Y-m-d H:i:s'),
+            date('P')
+        ), 'green');
+        CLI::newLine();
     }
 
     function scanDirModule() 
