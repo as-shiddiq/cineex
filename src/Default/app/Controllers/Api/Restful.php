@@ -102,7 +102,7 @@ class Restful extends ResourceController
         $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
-            if($this->request->getMethod()=="put"){
+            if(strtolower($this->request->getMethod())=="put"){
                 if($this->request->getRawInput()!=NULL){
                     $data=$this->request->getRawInput()['data'];
                     $model->updateNested($data,$id);
@@ -213,7 +213,7 @@ class Restful extends ResourceController
         $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
-            if($this->request->getMethod()=="put"){
+            if(strtolower($this->request->getMethod())=="put"){
                 if($this->request->getRawInput()!=NULL){
                     try {
                         $update = $model->updateData($id);
@@ -275,7 +275,7 @@ class Restful extends ResourceController
         $auth = auth();
         if($auth!=false){
             $model=$this->_setModel($url);
-            if($this->request->getMethod()=="delete"){
+            if(strtolower($this->request->getMethod())=="delete"){
                 try {
                     if($this->request->getRawInput()!=NULL){
                         $id=$this->request->getRawInput()['id'];
@@ -536,7 +536,7 @@ class Restful extends ResourceController
         if($auth!=false){
             $model=$this->_setModel($url);
             // set model
-            if($this->request->getMethod()=="post"){
+            if(strtolower($this->request->getMethod())=="post"){
                 try {
                     $model->importJSON();
                     $response = [

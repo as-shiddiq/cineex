@@ -28,7 +28,7 @@ class Profil extends ResourceController
         if($auth!=false){
             $PenggunaModel=new \App\Models\PenggunaModel;
             // $MemberModel=new \App\Models\MemberModel;
-            if($this->request->getMethod()=="put"){
+            if(strtolower($this->request->getMethod())=="put"){
                 if($this->request->getRawInput()!=NULL){
                     $invalid = false;
                     $userId = $auth->id;
@@ -99,7 +99,7 @@ class Profil extends ResourceController
     public function checkunique($id='')
     {
         $PenggunaModel = new \App\Models\PenggunaModel();
-        if($this->request->getMethod()=="post"){
+        if(strtolower($this->request->getMethod())=="post"){
             $get = $PenggunaModel->where('pengguna.id !=',$id);
             foreach($this->request->getPost() as $key => $value)
             {
