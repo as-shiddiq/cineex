@@ -42,7 +42,7 @@ php run install
 ```
 to install and run the project 😊
 
-## Haven't Installed Codeigniter
+## Haven't Installed Codeigniter ?
 If you don't install CodeIgniter by default, you can do some additional configuration.
 ```console
 cp -r vendor/codeigniter4/framework/public public
