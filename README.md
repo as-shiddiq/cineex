@@ -42,7 +42,7 @@ php run install
 ```
 to install and run the project 😊
 
-## Haven't Installed Codeigniter ?
+## Codeigniter Not Installed Yet?
 If you don't install CodeIgniter by default, you can do some additional configuration.
 ```console
 cp -r vendor/codeigniter4/framework/public public
@@ -58,3 +58,4 @@ then change path config on `app\Config\Paths.php`
 public string $systemDirectory = __DIR__ . '/../../vendor/codeigniter4/framework/system';
 
 ```
+After that, you can continue the process of replacing the default codeigniter coding with the cineex configuration.
