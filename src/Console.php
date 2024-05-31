@@ -4,7 +4,10 @@ use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Log\Logger;
 use ReflectionClass;
 use ReflectionException;
-class Console
+
+use CodeIgniter\CLI\Console as BaseConsole;
+
+class Console extends BaseConsole
 {
     protected $commands = [];
     protected $logger;
@@ -13,10 +16,12 @@ class Console
         $this->logger = $logger ?? service('logger');
         $this->discoverCommands();
     }
-    public function header()
+    public function showHeader($suppress = false)
     {
-        $cli = new \CodeIgniter\CLI\CLI();
-        $cli->write('Cineex v1.0 Command Line Tool - Server Time  '.date('Y-m-d H:i:s').' UTC '.date('P'),'blue');
+        if (!$suppress) {
+            $cli = new \CodeIgniter\CLI\CLI();
+            $cli->write('Cineex v1.3 Command Line Tool - Server Time  '.date('Y-m-d H:i:s').' UTC '.date('P'),'blue');
+        }
     }
     public function title(){
         $cli = new \CodeIgniter\CLI\CLI();
@@ -144,7 +149,7 @@ class Console
         {
             $this->title();
         }
-        $this->header();
+        // $this->header();
         if (! $this->verifyCommand($command, $this->commands)) {
           return;
         }
