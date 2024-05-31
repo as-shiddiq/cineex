@@ -1,3 +1,4 @@
+
 ![Cineex Logo](https://kodingakan.com/cineex.png)
 
 # Cineex  
@@ -6,7 +7,7 @@ Cineex is a framework that uses codeigniter 4 as its base, which makes it easy t
 
 ## What to use?
 Cineex uses an additional base in its manufacture :
-1. [CodeIgniter 4.3.7](https://codeigniter.com/)  
+1. [CodeIgniter v4.5.1](https://codeigniter.com/)  
 2. [NeomorphismeUI](https://themesberg.com/product/ui-kit/neumorphism-ui-kit-bootstrap) as CSS Framework
 3. [Dompdf](https://github.com/dompdf/dompdf) for pdf creation purposes, can be replaced if needed
 4. [UUID](https://github.com/ramsey/uuid) to create a uuid
@@ -31,8 +32,18 @@ next, copy file `run` as `spark` with command
 ```console
 cp vendor/as-shiddiq/cineex/run run
 ```
+then run the command, to replace the default codeigniter file
+```console
+php run replace:all
+```
+after that configure the .env file as desired, and then run 
+```console
+php run install
+```
+to install and run the project 😊
 
-if you dont install codeigniter default, copy directory default codeigniter
+## Haven't Installed Codeigniter
+If you don't install CodeIgniter by default, you can do some additional configuration.
 ```console
 cp -r vendor/codeigniter4/framework/public public
 ```
@@ -47,14 +58,3 @@ then change path config on `app\Config\Paths.php`
 public string $systemDirectory = __DIR__ . '/../../vendor/codeigniter4/framework/system';
 
 ```
-
-
-then run the command, to replace the default codeigniter file
-```console
-php run replace:all
-```
-after that configure the .env file as desired, and then run 
-```console
-php run install
-```
-to install and run the project 😊
