@@ -31,6 +31,7 @@ composer require as-shiddiq/cineex
 next, copy file `run` as `spark` with command
 ```console
 cp vendor/as-shiddiq/cineex/run run
+cp vendor/as-shiddiq/cineex/src/Default/app/Config/Paths.php /app/Config/Paths.php
 ```
 then run the command, to replace the default codeigniter file
 ```console
