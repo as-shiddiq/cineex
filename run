@@ -79,7 +79,7 @@ require FCPATH . '../app/Config/Paths.php';
 $paths = new Config\Paths();
 
 // LOAD THE FRAMEWORK BOOTSTRAP FILE
-require 'src/Boot.php';
+require $paths->cineexDirectory.'/src/Boot.php';
 // require $paths->systemDirectory . '/Boot.php';
 
 exit(Cineex\Boot::bootSpark($paths));
