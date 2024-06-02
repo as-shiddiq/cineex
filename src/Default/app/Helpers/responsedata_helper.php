@@ -16,7 +16,8 @@ function responseData($model, $config = [])
     // $getData = $model;
     //jika pakai ID
     if ( $config['id'] == 'all' || $config['id'] == '') {
-        $getData = $model->select('COUNT(*) as filtered');
+        $getData = $model->withAddons()
+                    ->select('COUNT(*) as filtered');
         $getData = _query($getData, $config);
         $getData =_where($getData, $config);
         $result = $getData->first();
