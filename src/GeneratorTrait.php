@@ -418,7 +418,7 @@ trait GeneratorTrait
     {
         $module = $this->getOption('module');
         $target = str_replace('Model','',$params[0]);
-        $mDir = ROOTPATH."\\modules\\".ucfirst($module)."\\Database\\Migrations";
+        $mDir = ROOTPATH."/modules/".ucfirst($module)."/Database/Migrations";
         $data = null;
         $table = '';
         $fields = [];
@@ -454,7 +454,7 @@ trait GeneratorTrait
     protected function listControllerMethod(array $params)
     {
         $module = str_replace('Model','',$params[0]);
-        $mDir = ROOTPATH."\\modules\\".ucfirst($module)."\\Controllers\\Dashboard";
+        $mDir = ROOTPATH."/modules/".ucfirst($module)."/Controllers/Dashboard";
         $class = [];
         if(is_dir($mDir))
         {
