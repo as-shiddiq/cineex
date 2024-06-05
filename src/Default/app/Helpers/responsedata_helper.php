@@ -2,13 +2,19 @@
 
 function responseData($model, $config = [])
 {
+    // disabling agregate
+    $db = \Config\Database::connect();
+    $query = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
+    $db->query($query);
+    // disabling agregate
+
     $request = \Config\Services::request();
     $getData = $model->withAddons('', $config);
-    $getData = _id($getData, $config);
-    $getData = _query($getData, $config);
-    $getData = _where($getData, $config);
-    $getData = _sort($getData, $config);
-    $data = _findAll($getData);
+    $getData = _idResp($getData, $config);
+    $getData = _queryResp($getData, $config);
+    $getData = _whereResp($getData, $config);
+    $getData = _sortResp($getData, $config);
+    $data = _findAllResp($getData);
     if ($config['debug']) {
         dd($getData->getLastQuery());
     }
@@ -17,18 +23,25 @@ function responseData($model, $config = [])
     //jika pakai ID
     if ( $config['id'] == 'all' || $config['id'] == '') {
         $getData = $model->withAddons()
-                    ->select('COUNT(*) as filtered');
-        $getData = _query($getData, $config);
-        $getData =_where($getData, $config);
+                        ->select('COUNT(*) as filtered');
+        $getData = _queryResp($getData, $config);
+        $getData =_whereResp($getData, $config);
         $result = $getData->first();
-        $meta['total_filtered'] = $result->filtered;
+        $totalFiltered = $result->filtered??0;
+        $meta['total_filtered'] = $totalFiltered;
 
         //set meta 
         if ($request->getGet('start') && $request->getGet('length')) {
             $meta['start'] = $request->getGet('start');
             $meta['length'] = $request->getGet('length');
         }
-        $meta['total'] = $request->getGet('length')??0;
+        //cek if total data lower than length
+        $total = $request->getGet('length')??0;
+        if($total>$totalFiltered)
+        {
+            $total = $totalFiltered;
+        }
+        $meta['total'] = $total;
     }
     else
     {
@@ -42,27 +55,27 @@ function responseData($model, $config = [])
     ];
 }
 
-function _skipColumn($skipColumn)
+function _skipColumnResp($skipColumn)
 {
     $def = ['created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by'];
     return array_merge($skipColumn, $def);
 }
 
-function _whereColumn($config)
+function _whereRespColumn($config)
 {
     $def = $config['column'];
     $add = $config['whereColumn'];
-    $_whereColumn = array_merge($add, $def);
-    foreach (_skipColumn($config['skipColumn']) as $key => $value) {
-        if(in_array($value,$_whereColumn))
+    $_whereRespColumn = array_merge($add, $def);
+    foreach (_skipColumnResp($config['skipColumn']) as $key => $value) {
+        if(in_array($value,$_whereRespColumn))
         {
-            unset($_whereColumn[$value]);
+            unset($_whereRespColumn[$value]);
         }
     }
-    return $_whereColumn;
+    return $_whereRespColumn;
 }
 
-function _id($getData, $config)
+function _idResp($getData, $config)
 {
     if ($config['id'] !== false && $config['id'] != 'all' && $config['id'] != '') {
         $getData->where($config['table'].'.id',$config['id']);
@@ -70,7 +83,7 @@ function _id($getData, $config)
     return $getData;
 }
 
-function _where($getData, $config,$type='')
+function _whereResp($getData, $config,$type='')
 {
     $request = \Config\Services::request();
     // bypass where
@@ -94,7 +107,7 @@ function _where($getData, $config,$type='')
                 if ($value == '') {
                     $value = null;
                 }
-                if (in_array($key, _whereColumn($config))) {
+                if (in_array($key, _whereRespColumn($config))) {
                     $exists = true;
                     continue;
                 }
@@ -116,7 +129,7 @@ function _where($getData, $config,$type='')
                         if($substr=='!')
                         {
                             $v = substr($v,1);
-                            if (in_array($key, _whereColumn($config))) {
+                            if (in_array($key, _whereRespColumn($config))) {
                                 $getData->where($config['table'] . '.' . $key.' !=', $v);
                             } else {
                                 if($type!=='base')
@@ -127,7 +140,7 @@ function _where($getData, $config,$type='')
                         }
                         else
                         {
-                            if (in_array($key, _whereColumn($config))) {
+                            if (in_array($key, _whereRespColumn($config))) {
                                 $getData->where($config['table'] . '.' . $key, $v);
                             } else {
                                 if($type!=='base')
@@ -144,7 +157,7 @@ function _where($getData, $config,$type='')
                     if($substr=='!')
                     {
                         $value = substr($value,1);
-                        if (in_array($key, _whereColumn($config))) {
+                        if (in_array($key, _whereRespColumn($config))) {
                             $getData->where($config['table'] . '.' . $key.' !=', $value);
                         } else {
                             if($type!=='base')
@@ -155,7 +168,7 @@ function _where($getData, $config,$type='')
                     }
                     else
                     {
-                        if (in_array($key, _whereColumn($config))) {
+                        if (in_array($key, _whereRespColumn($config))) {
                             $getData->where($config['table'] . '.' . $key, $value);
                         } else {
                             if($type!=='base')
@@ -179,16 +192,16 @@ function _where($getData, $config,$type='')
 }
 
 
-function _query($getData, $config)
+function _queryResp($getData, $config)
 {
     $request = \Config\Services::request();
-    $_whereColumn = _whereColumn($config);
+    $_whereRespColumn = _whereRespColumn($config);
     if ($request->getGet('search')) {
         if (isset($request->getGet('search')['value'])) {
             $search = $request->getGet('search')['value'];
             $getData->groupStart();
-            foreach ($_whereColumn as $key => $value) {
-                if (!in_array($value, _skipColumn($config['skipColumn']))) {
+            foreach ($_whereRespColumn as $key => $value) {
+                if (!in_array($value, _skipColumnResp($config['skipColumn']))) {
                     if(in_array($value,$config['column']))
                     {
                          $getData->orLike($config['table'] . '.' . $value, $search);
@@ -206,7 +219,7 @@ function _query($getData, $config)
                 $getData->groupStart();
                 //check search compare with field table
                 foreach ($search as $key => $value) {
-                     if (in_array($key, $_whereColumn)) {
+                     if (in_array($key, $_whereRespColumn)) {
                         $getData->orLike($config['table'] . '.' . $key, $value);
                      }
                      else
@@ -216,7 +229,7 @@ function _query($getData, $config)
                 }
                 $getData->groupEnd();
             } else {
-                $column = array_diff($config['column'], _skipColumn($config['skipColumn']));
+                $column = array_diff($config['column'], _skipColumnResp($config['skipColumn']));
                 $search = $request->getGet('search');
                 $getData->groupStart();
                 foreach ($column as $key => $value) {
@@ -243,7 +256,7 @@ function _query($getData, $config)
     return $getData;
 }
 
-function _sort($getData, $config)
+function _sortResp($getData, $config)
 {
     $request = \Config\Services::request();
     if ($request->getGet('order')) {
@@ -258,7 +271,7 @@ function _sort($getData, $config)
     return $getData;
 }
 
-function _findAll($getData, $limit = true)
+function _findAllResp($getData, $limit = true)
 {
     $request = \Config\Services::request();
 
