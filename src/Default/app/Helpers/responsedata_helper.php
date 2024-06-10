@@ -243,12 +243,15 @@ function _queryResp($getData, $config)
     //if search by column 
     $columns = $request->getGet('columns')??[];
     foreach ($columns as $key => $value) {
-        if($value['searchable']=='true')
+        if(isset($value['searchable']))
         {
-            $search = $value['search']['value'];
-            if($search!='')
+            if($value['searchable']=='true')
             {
-                $getData->like($value['name'], $search);
+                $search = $value['search']['value'];
+                if($search!='')
+                {
+                    $getData->like($value['name'], $search);
+                }
             }
         }
     }
