@@ -97,4 +97,17 @@ class Autoload extends AutoloadConfig
     public $files = [
         // APPPATH.'Cineex/Cineex.php'
     ];
+
+    /**
+     * -------------------------------------------------------------------
+     * Helpers
+     * -------------------------------------------------------------------
+     * Prototype:
+     *   $helpers = [
+     *       'form',
+     *   ];
+     *
+     * @var list<string>
+     */
+    public $helpers = [];
 }

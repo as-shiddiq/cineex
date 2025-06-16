@@ -31,6 +31,7 @@ class PenggunalevelModel extends Model
 
     // Validation
     protected $validationRules      = [
+        'id'    => 'alpha_numeric_punct',
         'pengguna_level_nama' => "required|is_unique[pengguna_level.pengguna_level_nama,id,{id}]"
     ];
     protected $validationMessages   = [];
@@ -107,6 +108,7 @@ class PenggunalevelModel extends Model
     function updateData($id=null,$data=null)
     {
         $auth = auth();
+        $checkLevel = $this->find($id);
         if($auth!=false)
         {
              if($checkLevel->pengguna_level_nama=='Administrator')

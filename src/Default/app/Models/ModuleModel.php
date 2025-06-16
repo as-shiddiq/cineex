@@ -36,6 +36,7 @@ class ModuleModel extends Model
     // Validation
     // Validation
     protected $validationRules      = [
+        'id'    => 'alpha_numeric_punct',
         'module_nama' => "required|is_unique[module.module_nama,id,{id}]"
     ];
     protected $validationMessages   = [

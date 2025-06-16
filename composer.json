@@ -4,7 +4,7 @@
     "type": "library",
     "license": "proprietary",
     "require-dev": {
-        "codeigniter4/framework": "4.5.1",
+        "codeigniter4/framework": "4.6.1",
         "firebase/php-jwt": "^5.2",
         "rosell-dk/webp-convert": "^2.9",
         "ramsey/uuid": "^4.0",
