@@ -12,73 +12,87 @@ class Auth extends ResourceController
     private $table;
     private $primaryKey;
     private $fillable;
-    protected $helpers = ['app', 'cineex', 'form', 'tanggal', 'responsedata','auth','nnotif'];
+    protected $helpers = ['app', 'cineex', 'form', 'tanggal', 'responsedata','auth','nnotif','recaptchav3'];
 
     public function __construct()
     {
     }
     
     public function signin(){
-        if(strtolower($this->request->getMethod())=="post"){
-            $PenggunaModel = new \App\Models\PenggunaModel();
-            $username = $this->request->getPost('username');
-            $password = $this->request->getPost('password');
-            $getPengguna = $PenggunaModel->withAddons()
-                                        ->where('pengguna_username',$username)
-                                        ->orWhere('pengguna_email',$username)
-                                        ->orWhere('pengguna_hp',$username)
-                                        ->first();
+        // reCAPTCHA
+        $token = $this->request->getPost('recaptcha_token');
+        $errorRecapchatv3 = null;
+        $recapchatv3 = recaptchav3Verify($token,$errorRecapchatv3);
+        if ($recapchatv3) {
+            if(strtolower($this->request->getMethod())=="post"){
+                $PenggunaModel = new \App\Models\PenggunaModel();
+                $username = $this->request->getPost('username');
+                $password = $this->request->getPost('password');
+                $getPengguna = $PenggunaModel->withAddons()
+                                            ->where('pengguna_username',$username)
+                                            ->orWhere('pengguna_email',$username)
+                                            ->orWhere('pengguna_hp',$username)
+                                            ->first();
 
-            $response = [
-                'status' => 500,
-                'error' => true,
-                'message' => "Username atau password salah"
-            ];
-            if($getPengguna!=null)
-            {
-                if(password_verify($password, $getPengguna->pengguna_password))
+                $response = [
+                    'status' => 500,
+                    'error' => true,
+                    'message' => "Username atau password salah"
+                ];
+                if($getPengguna!=null)
                 {
-                    if($getPengguna->pengguna_status=='A')
+                    if(password_verify($password, $getPengguna->pengguna_password))
                     {
-                        $PenggunaModel->update($getPengguna->id,['signed_at'=>timestamp()]);
-                        $config['id'] = $getPengguna->id;
-                        $config['level'] = $getPengguna->pengguna_level_nama;
+                        if($getPengguna->pengguna_status=='A')
+                        {
+                            $PenggunaModel->update($getPengguna->id,['signed_at'=>timestamp()]);
+                            $config['id'] = $getPengguna->id;
+                            $config['level'] = $getPengguna->pengguna_level_nama;
 
-                        $response = [
-                            'status' => 200,
-                            'error' => false,
-                            'message' => "Signin success, please click OK to continue",
-                            'redirect' => site_url('dashboard/home'),
-                            'token' => setToken($config)
-                        ];
+                            $response = [
+                                'status' => 200,
+                                'error' => false,
+                                'message' => "Signin success, please click OK to continue",
+                                'redirect' => site_url('dashboard/home'),
+                                'token' => setToken($config)
+                            ];
+                        }
+                        else if($getPengguna->pengguna_status=='N')
+                        {
+
+                            $response = [
+                                'status' => 500,
+                                'error' => true,
+                                'message' => "Akun sedang dinonaktifkan, mungkin sedang proses aktivasi. Silakan cek email untuk aktivasi"
+                            ];
+                        }
+                        else
+                        {
+
+                            $response = [
+                                'status' => 500,
+                                'error' => true,
+                                'message' => "Akun sedang diblokir/ditangguhkan"
+                            ];
+                        }
+
                     }
-                    else if($getPengguna->pengguna_status=='N')
-                    {
-
-                        $response = [
-                            'status' => 500,
-                            'error' => true,
-                            'message' => "Akun sedang dinonaktifkan, mungkin sedang proses aktivasi. Silakan cek email untuk aktivasi"
-                        ];
-                    }
-                    else
-                    {
-
-                        $response = [
-                            'status' => 500,
-                            'error' => true,
-                            'message' => "Akun sedang diblokir/ditangguhkan"
-                        ];
-                    }
-
                 }
             }
+            else{
+                $response = [
+                    'status' => 500,
+                    'error' => true,
+                    'message' => "Method must with POST"
+                ];
+            }
         }
-        else{
+        else
+        {
             $response = [
-                'status' => 500,
+                'status' => 401,
                 'error' => true,
-                'message' => "Method must with POST"
+                'message' => $errorRecapchatv3,
             ];
         }
         return $this->respond($response, $response['status']);
