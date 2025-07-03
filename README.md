@@ -60,3 +60,7 @@ public string $systemDirectory = __DIR__ . '/../../vendor/codeigniter4/framework
 
 ```
 After that, you can continue the process of replacing the default codeigniter coding with the cineex configuration.
+
+## Default Login with ReCaptchav3 Google
+
+https://www.google.com/recaptcha/admin
