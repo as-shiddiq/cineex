@@ -7,9 +7,8 @@ class Sitemap extends BaseController
     {
         $sitemap = [];
         $sitemap[] = site_url();
-       
         foreach (\scanDirModule() as $key => $value) {
-            $sitemapFiles = pathModule().$value.'/Config/Sitemaps.php';
+            $sitemapFiles = ROOTPATH.'modules/'.$value.'/Config/Sitemaps.php';
             if(file_exists($sitemapFiles))
             {
                 include $sitemapFiles;
