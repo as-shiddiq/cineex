@@ -13,4 +13,4 @@ env
 .env
 phpunit.xml.dist
 preload.php
-.DS_storeapp/Database/Seeds/ConfigemailSeeder.php
+.DS_store
