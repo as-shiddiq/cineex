@@ -58,7 +58,16 @@ class Install extends BaseCommand
         $runner  = Services::commands();
         $dbExists = false;
         $dbName = getenv('database.default.database');
-        $forge = \Config\Database::forge('init');
+        try {
+            $forge = \Config\Database::forge('init');
+        } catch (\Throwable $e) {
+            $config = config('Database');
+            $group = $config->defaultGroup ?? 'default';
+            $settings = (array) ($config->{$group} ?? []);
+            $settings['database'] = '';
+            $conn = \CodeIgniter\Database\Config::connect($settings);
+            $forge = \CodeIgniter\Database\Config::forge($conn);
+        }
         if($forge->createDatabase($dbName, true))
         {
             CLI::write('✅ Databases '.$dbName.' created!');

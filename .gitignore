@@ -13,4 +13,5 @@ env
 .env
 phpunit.xml.dist
 preload.php
-.DS_store
+.DS_Store
+**/.DS_Store
