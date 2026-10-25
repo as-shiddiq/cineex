@@ -98,6 +98,7 @@ function toSlug($text, $divider = '-')
   return empty($text) ? 'n-a' : $text;
 }
 
+if (!function_exists('cardToolbar')) {
 function cardToolbar($configBtn=array()){
 
 	$btn = '';
@@ -145,6 +146,7 @@ function cardToolbar($configBtn=array()){
 		}
 	}
 	return $btn;
+}
 }
 
 function defaultValue($type,$data) {
@@ -238,15 +240,28 @@ function requestAll($fillable, $method = '') {
   $request = \Config\Services::request();
   $data = [];
 
-  switch ($method) {
-    case 'getRawInput':
+  switch (strtolower($method)) {
+    case 'put':
+    case 'getrawinput':
       $input = $request->getRawInput();
       break;
-    case 'getGet':
+    case 'get':
+    case 'getget':
       $input = $request->getGet();
       break;
-    default:
+    case 'post':
+    case 'getpost':
       $input = $request->getPost();
+      break;
+    default:
+      $reqMethod = strtolower($request->getMethod());
+      if ($reqMethod === 'put') {
+        $input = $request->getRawInput();
+      } elseif ($reqMethod === 'get') {
+        $input = $request->getGet();
+      } else {
+        $input = $request->getPost();
+      }
       break;
   }
 

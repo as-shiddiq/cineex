@@ -27,7 +27,7 @@ function responseData($model, $config = [])
         $getData = _queryResp($getData, $config);
         $getData =_whereResp($getData, $config);
         $result = $getData->first();
-        $totalFiltered = $result->filtered??0;
+        $totalFiltered = is_array($result) ? ($result['filtered'] ?? 0) : ($result->filtered ?? 0);
         $meta['total_filtered'] = $totalFiltered;
 
         //set meta 
@@ -63,16 +63,10 @@ function _skipColumnResp($skipColumn)
 
 function _whereRespColumn($config)
 {
-    $def = $config['column'];
-    $add = $config['whereColumn'];
+    $def = $config['column'] ?? [];
+    $add = $config['whereColumn'] ?? [];
     $_whereRespColumn = array_merge($add, $def);
-    foreach (_skipColumnResp($config['skipColumn']) as $key => $value) {
-        if(in_array($value,$_whereRespColumn))
-        {
-            unset($_whereRespColumn[$value]);
-        }
-    }
-    return $_whereRespColumn;
+    return array_values(array_diff($_whereRespColumn, _skipColumnResp($config['skipColumn'] ?? [])));
 }
 
 function _idResp($getData, $config)
@@ -198,44 +192,50 @@ function _queryResp($getData, $config)
     $_whereRespColumn = _whereRespColumn($config);
     if ($request->getGet('search')) {
         if (isset($request->getGet('search')['value'])) {
-            $search = $request->getGet('search')['value'];
-            $getData->groupStart();
-            foreach ($_whereRespColumn as $key => $value) {
-                if (!in_array($value, _skipColumnResp($config['skipColumn']))) {
-                    if(in_array($value,$config['column']))
-                    {
-                         $getData->orLike($config['table'] . '.' . $value, $search);
-                    }
-                    else
-                    {
-                         $getData->orLike($value, $search);
+            $search = trim((string) $request->getGet('search')['value']);
+            if ($search !== '' && !empty($_whereRespColumn)) {
+                $getData->groupStart();
+                foreach ($_whereRespColumn as $key => $value) {
+                    if (!in_array($value, _skipColumnResp($config['skipColumn']))) {
+                        if(in_array($value,$config['column']))
+                        {
+                             $getData->orLike($config['table'] . '.' . $value, $search);
+                        }
+                        else
+                        {
+                             $getData->orLike($value, $search);
+                        }
                     }
                 }
+                $getData->groupEnd();
             }
-            $getData->groupEnd();
         } else {
             if (is_array($request->getGet('search'))) {
                 $search = $request->getGet('search');
-                $getData->groupStart();
-                //check search compare with field table
-                foreach ($search as $key => $value) {
-                     if (in_array($key, $_whereRespColumn)) {
-                        $getData->orLike($config['table'] . '.' . $key, $value);
-                     }
-                     else
-                     {
-                        $getData->orLike($key, $value);
-                     }
+                if (!empty($search)) {
+                    $getData->groupStart();
+                    //check search compare with field table
+                    foreach ($search as $key => $value) {
+                         if (in_array($key, $_whereRespColumn)) {
+                            $getData->orLike($config['table'] . '.' . $key, $value);
+                         }
+                         else
+                         {
+                            $getData->orLike($key, $value);
+                         }
+                    }
+                    $getData->groupEnd();
                 }
-                $getData->groupEnd();
             } else {
                 $column = array_diff($config['column'], _skipColumnResp($config['skipColumn']));
-                $search = $request->getGet('search');
-                $getData->groupStart();
-                foreach ($column as $key => $value) {
-                    $getData->orLike($config['table'] . '.' . $value, $search);
+                $search = trim((string) $request->getGet('search'));
+                if ($search !== '' && !empty($column)) {
+                    $getData->groupStart();
+                    foreach ($column as $key => $value) {
+                        $getData->orLike($config['table'] . '.' . $value, $search);
+                    }
+                    $getData->groupEnd();
                 }
-                $getData->groupEnd();
             }
         }
     }
@@ -247,10 +247,13 @@ function _queryResp($getData, $config)
         {
             if($value['searchable']=='true')
             {
-                $search = $value['search']['value'];
+                $search = $value['search']['value'] ?? '';
                 if($search!='')
                 {
-                    $getData->like($value['name'], $search);
+                    $colName = !empty($value['name']) ? $value['name'] : ($value['data'] ?? '');
+                    if ($colName !== '') {
+                        $getData->like($colName, $search);
+                    }
                 }
             }
         }
@@ -266,9 +269,12 @@ function _sortResp($getData, $config)
         $order = $request->getGet('order');
         $columns = $request->getGet('columns');
         foreach ($order as $key => $value) {
-            $field = $columns[$order[$key]['column']]['name'];
-            $sort = $order[$key]['dir'];
-            $getData->orderBy($field,$sort);
+            $colIdx = $order[$key]['column'] ?? 0;
+            $field = !empty($columns[$colIdx]['name']) ? $columns[$colIdx]['name'] : ($columns[$colIdx]['data'] ?? '');
+            $sort = $order[$key]['dir'] ?? 'asc';
+            if ($field !== '') {
+                $getData->orderBy($field, $sort);
+            }
         }
     }
     return $getData;
